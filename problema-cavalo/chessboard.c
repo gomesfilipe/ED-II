@@ -165,7 +165,7 @@ int search_solution(Chessboard* b){
 void print_chessboard(Chessboard* b){
     for(int i = 0; i < b->rows; i++){
         for(int j = 0; j < b->columns; j++){
-            printf("%2d ", b->board[i][j]);
+            printf("%02d ", b->board[i][j]);
         }
 
         printf("\n");
