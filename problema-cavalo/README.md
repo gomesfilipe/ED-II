@@ -2,8 +2,9 @@
 
 Nestes arquivos escrevi um código que resolve este problema, que tem o seguinte enunciado:
 ```
-Dado um tabuleiro com n × n posições, o cavalo movimenta-se segundo as
-regras do xadrez. A partir de uma posição inicial (x0, y0), o problema consiste em encontrar, se existir, um passeio do cavalo com (n² − 1) movimentos, tal que todos os pontos do tabuleiro são visitados uma única vez.
+Dado um tabuleiro com n × n posições, o cavalo movimenta-se segundo as regras do xadrez. A partir de uma posição 
+inicial (x0, y0), o problema consiste em encontrar, se existir, um passeio do cavalo com (n² − 1) movimentos, 
+tal que todos os pontos do tabuleiro são visitados uma única vez.
 ```
 O paradigma para resolver este desafio foi o de tentativa e erro. O programa faz uma busca em profundidade
 analisando todas as possibilidades de caminhos do cavalo, até encontrar uma solução correta. 
