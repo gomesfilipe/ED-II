@@ -70,7 +70,12 @@ void insertion_sort(int* array, int length){
 }
 
 void shell_sort(int* array, int length){
+    int h = 1;
+    while(h <= length) h = 3*h + 1;
 
+    for(int i = 0; ; i++){
+        
+    } 
 }
 
 void quick_sort(int* array, int length){
