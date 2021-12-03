@@ -21,3 +21,17 @@ O Insertion Sort toma como base um elemento pivô numa determinada posição i. 
 ## Shell Sort
 
 ## Quick Sort
+
+O Quick Sort escolhe um elemento pivô arbitrário do vetor. Em seguida, o percorre organizando de modo que os elementos menores que o pivô estejam a sua esquerda e os elementos maiores ou iguais que o pivô estejam a sua direita. Dai o algoritmo é chamado recursivamente para cada uma das partes, até que cada subvetor tenha tamanho 1, e enfim, esteja ordenado.
+
+![gifs/quick_sort.gif](gifs/quick_sort.gif)
+
+# Complexidade
+
+Algoritmo | Melhor Caso | Pior Caso | Caso Médio
+--- | --- | --- | ---
+Bubble Sort | O(n) | O(n²) | O(n²)
+Selection Sort | O(n²)| O(n²) | O(n²)
+Insertion Sort | O(n) | O(n²) | O(n²)
+Shell Sort | | |
+Quick Sort | O(n * lgn)| O(n²) | O(n * lgn)

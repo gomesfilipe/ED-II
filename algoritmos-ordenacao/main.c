@@ -8,7 +8,7 @@ int main(){
     // bubble_sort(array, length);
     // selection_sort(array, length);
     // insertion_sort(array, length);
-    shell_sort(array, length);
+    quick_sort(array, length);
     print_array(array, length);
 
     free_array(array);

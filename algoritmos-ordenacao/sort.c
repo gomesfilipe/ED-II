@@ -78,6 +78,27 @@ void shell_sort(int* array, int length){
     } 
 }
 
-void quick_sort(int* array, int length){
+void partition(int * array, int begin, int end){
+    if(begin >= end ) return;
+    
+    int pivo = begin;
+    int j = begin + 1;
 
+    for(int i = begin; i <= end; i++){
+        if(array[i] < array[pivo]){
+            swap(&array[j], &array[i]);
+            j++;
+        }
+    }
+
+    swap(&array[pivo], &array[j - 1]);
+    
+    pivo = j - 1;
+
+    partition(array, begin, pivo - 1);
+    partition(array, pivo + 1, end);
+}
+
+void quick_sort(int* array, int length){
+    partition(array, 0, length - 1);
 }
