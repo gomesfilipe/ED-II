@@ -21,4 +21,6 @@ void shell_sort(int* array, int length);
 
 void quick_sort(int* array, int length);
 
+int is_sorted(int* array, int length);
+
 #endif

@@ -9,6 +9,7 @@ int* create_array(int length){
         array[i] = rand();
     }
 
+
     return array;
 }
 
@@ -61,7 +62,7 @@ void insertion_sort(int* array, int length){
     for(int i = 1; i < length; i++){
         inserted = array[i];
         
-        for(j = i - 1; inserted < array[j] && j >= 0; j--){
+        for(j = i - 1; j >= 0 && inserted < array[j]; j--){
             array[j + 1] = array[j];
         }
 
@@ -70,12 +71,19 @@ void insertion_sort(int* array, int length){
 }
 
 void shell_sort(int* array, int length){
-    int h = 1;
-    while(h <= length) h = 3*h + 1;
+    int inserted, j;
+    for(int gap = length / 2; gap > 0; gap /= 2){
 
-    for(int i = 0; ; i++){
-        
-    } 
+        for(int i = gap; i < length; i += gap){
+            inserted = array[i];
+
+            for(j = i - gap; j >= 0 && inserted < array[j]; j -= gap){
+                array[j + gap] = array[j];
+            }
+
+            array[j + gap] = inserted;
+        }
+    }
 }
 
 void partition(int * array, int begin, int end){
@@ -101,4 +109,13 @@ void partition(int * array, int begin, int end){
 
 void quick_sort(int* array, int length){
     partition(array, 0, length - 1);
+}
+
+int is_sorted(int* array, int length){
+    for(int i = 0; i < length - 1; i++){
+        if(array[i] > array[i + 1]){
+            return 0;
+        }
+    }
+    return 1;
 }
