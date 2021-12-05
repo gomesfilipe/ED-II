@@ -5,6 +5,8 @@
 #include <stdlib.h>
 #include <time.h>
 
+typedef void (*fptr) (int*, int);
+
 int* create_array(int length);
 
 void free_array(int* array);
@@ -22,5 +24,7 @@ void shell_sort(int* array, int length);
 void quick_sort(int* array, int length);
 
 int is_sorted(int* array, int length);
+
+double timer(fptr sort_function, int* array, int length);
 
 #endif

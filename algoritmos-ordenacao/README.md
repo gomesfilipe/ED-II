@@ -19,6 +19,9 @@ O Insertion Sort toma como base um elemento pivô numa determinada posição i. 
 ![gifs/insertion_sort.gif](gifs/insertion_sort.gif)
 
 ## Shell Sort
+O Shell Sort funciona como uma extensão do Insertion Sort, pois ele permite a comparação entre elementos distantes do vetor. Ele determina uma distância entre os elementos a serem comparados (chamada de gap) e aplica a lógica do Insertion Sort nos elementos que são múltiplos desse gap. A cada gap definido, o vetor é percorrido e este salto vai sendo reduzido a cada laço até zerar, assim ordenando a lista. 
+
+![gifs/shell_sort.gif](gifs/shell_sort.gif)
 
 ## Quick Sort
 
@@ -33,5 +36,19 @@ Algoritmo | Melhor Caso | Pior Caso | Caso Médio
 Bubble Sort | O(n) | O(n²) | O(n²)
 Selection Sort | O(n²)| O(n²) | O(n²)
 Insertion Sort | O(n) | O(n²) | O(n²)
-Shell Sort | | |
-Quick Sort | O(n * lgn)| O(n²) | O(n * lgn)
+Shell Sort | O(n lgn) ou O(n lg²n) | O(n²) ou O(n lg²n)| O(n^1,25) ou O(n * lg²n)
+Quick Sort | O(n lgn)| O(n²) | O(n lgn)
+
+Obs: As complexidades do Shell Sort dependem do gap e da lista a ser ordenada.
+
+# Tempos de Execução
+
+Após execução dos algoritmos para vetores de tamanhos n, os seguintes tempos de execução foram obtidos:
+
+Algoritmo|n=5.000|n=10.000|n=20.000|n=40.000|n=80.000|n=160.000|n=320.000|n=640.000|n=1.280.000
+--- | --- | --- | --- | --- | --- | --- | --- | --- | ---
+Bubble Sort    | 0.109 s | 0.447 s | 1.845 s | 7.439 s | 30.523 s | 125.414 s | 499.462 s | 1982.412 s | s 
+Selection Sort | 0.026 s | 0.099 s | 0.389 s | 1.610 s | 6.480 s | 25.895 s | 116.446 s | 411.140 s | s 
+Insertion Sort | 0.017 s | 0.053 s | 0.244 s | 0.906 s | 3.698 s | 14.768 s | 59.943 s | 455.426 s | s 
+Shell Sort     | 0.011 s | 0.050 s | 0.170 s | 0.710 s | 2.856 s | 13.016 s | 64.688 s | 313.416 s | s 
+Quick Sort     | 0.001 s | 0.002 s | 0.011 s | 0.010 s | 0.020 s | 0.025 s | 0.052 s | 0.112 s | s 

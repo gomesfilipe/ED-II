@@ -1,0 +1,56 @@
+Tamanho do vetor: 5000
+Bubble Sort: 0.109
+Selection Sort: 0.026
+Insertion Sort: 0.017
+Shell Sort: 0.011
+Quick Sort: 0.001
+
+Tamanho do vetor: 10000
+Bubble Sort: 0.447
+Selection Sort: 0.099
+Insertion Sort: 0.053
+Shell Sort: 0.050
+Quick Sort: 0.002
+
+Tamanho do vetor: 20000
+Bubble Sort: 1.845
+Selection Sort: 0.389
+Insertion Sort: 0.244
+Shell Sort: 0.170
+Quick Sort: 0.011
+
+Tamanho do vetor: 40000
+Bubble Sort: 7.439
+Selection Sort: 1.610
+Insertion Sort: 0.906
+Shell Sort: 0.710
+Quick Sort: 0.010
+
+Tamanho do vetor: 80000
+Bubble Sort: 30.523
+Selection Sort: 6.480
+Insertion Sort: 3.698
+Shell Sort: 2.856
+Quick Sort: 0.020
+
+Tamanho do vetor: 160000
+Bubble Sort: 125.414
+Selection Sort: 25.895
+Insertion Sort: 14.768
+Shell Sort: 13.016
+Quick Sort: 0.025
+
+Tamanho do vetor: 320000
+Bubble Sort: 499.462
+Selection Sort: 116.446
+Insertion Sort: 59.943
+Shell Sort: 64.688
+Quick Sort: 0.052
+
+Tamanho do vetor: 640000
+Bubble Sort: 1982.412
+Selection Sort: 411.140
+Insertion Sort: 455.426
+Shell Sort: 313.416
+Quick Sort: 0.112
+

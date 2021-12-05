@@ -119,3 +119,15 @@ int is_sorted(int* array, int length){
     }
     return 1;
 }
+
+double timer(fptr sort_function, int* array, int length){
+    clock_t start, end;
+    double cpu_time_used;
+    start = clock();
+
+    sort_function(array, length);
+
+    end = clock();
+    cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
+    return cpu_time_used;
+}

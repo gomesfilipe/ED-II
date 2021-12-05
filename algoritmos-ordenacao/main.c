@@ -1,22 +1,51 @@
 #include "sort.h"
 
+#define QTDALGORITMOS 5
+
 int main(){
-    int length = 100000;
-    int* array = create_array(length);
-    //print_array(array, length);
+    fptr sort_functions[QTDALGORITMOS] = {
+        bubble_sort,
+        selection_sort, 
+        insertion_sort, 
+        shell_sort, 
+        quick_sort
+    };
 
-    //bubble_sort(array, length);
-    //selection_sort(array, length);
-    //insertion_sort(array, length);
-    //shell_sort(array, length);
+    char* sort_names[QTDALGORITMOS] = {
+        "Bubble Sort", 
+        "Selection Sort", 
+        "Insertion Sort", 
+        "Shell Sort", 
+        "Quick Sort"
+    };
 
-    quick_sort(array, length);
-    //print_array(array, length);
-
-    printf("chegou aq\n\n");
-    if(is_sorted(array, length)){
-        printf("Ordenado!\n");
+    FILE *f = fopen("analise2.txt", "a");
+    
+    if(f == NULL){
+        printf("Erro na abertura do arquivo.\n");
+        exit(1);
     }
 
-    free_array(array);
+    int x = 0;
+
+    for(int length = 5000; length <= 1280000; length *= 2){
+        fprintf(f, "Tamanho do vetor: %d\n", length);
+
+        for(int i = 0; i < QTDALGORITMOS; i++){
+            int* array = create_array(length);
+
+            double time = timer(sort_functions[i], array, length);
+
+            fprintf(f, "%s: %.3lf\n", sort_names[i], time);
+
+            free_array(array);
+
+            printf("[%d]\n", x++);
+        }
+
+        fprintf(f, "\n");
+    }
+
+    fclose(f);
+    return 0;
 }
