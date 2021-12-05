@@ -36,7 +36,7 @@ int main(){
 
             double time = timer(sort_functions[i], array, length);
 
-            fprintf(f, "%s: %.3lf\n", sort_names[i], time);
+            fprintf(f, "%s: %.3lf s\n", sort_names[i], time);
 
             free_array(array);
 
