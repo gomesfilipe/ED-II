@@ -47,8 +47,8 @@ Após execução dos algoritmos para vetores de tamanhos n, os seguintes tempos 
 
 Algoritmo|n=5.000|n=10.000|n=20.000|n=40.000|n=80.000|n=160.000|n=320.000|n=640.000|n=1.280.000
 --- | --- | --- | --- | --- | --- | --- | --- | --- | ---
-Bubble Sort    | 0.109 s | 0.447 s | 1.845 s | 7.439 s | 30.523 s | 125.414 s | 499.462 s | 1982.412 s | s 
-Selection Sort | 0.026 s | 0.099 s | 0.389 s | 1.610 s | 6.480 s | 25.895 s | 116.446 s | 411.140 s | s 
-Insertion Sort | 0.017 s | 0.053 s | 0.244 s | 0.906 s | 3.698 s | 14.768 s | 59.943 s | 455.426 s | s 
-Shell Sort     | 0.011 s | 0.050 s | 0.170 s | 0.710 s | 2.856 s | 13.016 s | 64.688 s | 313.416 s | s 
-Quick Sort     | 0.001 s | 0.002 s | 0.011 s | 0.010 s | 0.020 s | 0.025 s | 0.052 s | 0.112 s | s 
+Bubble Sort    | 0.109 s | 0.447 s | 1.845 s | 7.439 s | 30.523 s | 2.09 min  | 8.32 min | 33.04 min | 2 h 15 min 
+Selection Sort | 0.026 s | 0.099 s | 0.389 s | 1.610 s | 6.480 s  | 25.895 s  | 1.94 min | 6.85 min  | 27.55 min
+Insertion Sort | 0.017 s | 0.053 s | 0.244 s | 0.906 s | 3.698 s  | 14.768 s  | 59.943 s | 7.59 min  | 32.03 min 
+Shell Sort     | 0.011 s | 0.050 s | 0.170 s | 0.710 s | 2.856 s  | 13.016 s  | 64.688 s | 5.22 min  | 21.79 min 
+Quick Sort     | 0.001 s | 0.002 s | 0.011 s | 0.010 s | 0.020 s  | 0.025 s   | 0.052 s  | 0.112 s   | 0.245 s 

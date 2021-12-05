@@ -19,7 +19,7 @@ int main(){
         "Quick Sort"
     };
 
-    FILE *f = fopen("analise2.txt", "a");
+    FILE *f = fopen("analise2.txt", "w");
     
     if(f == NULL){
         printf("Erro na abertura do arquivo.\n");
@@ -40,7 +40,7 @@ int main(){
 
             free_array(array);
 
-            printf("[%d]\n", x++);
+            printf("[%d]\n", x++); // Para me situar em qual ponto da execução está.
         }
 
         fprintf(f, "\n");
