@@ -9,7 +9,6 @@ int* create_array(int length){
         array[i] = rand();
     }
 
-
     return array;
 }
 
