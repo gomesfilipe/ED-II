@@ -67,7 +67,7 @@ void swap(int* a, int* b) {
 }
 
 void partial_selection_sort(Array* array , int k) {
-    if(k > array->size) return;
+    if(k > array->length) return;
     
     int min = 0;
     // int trocas = 0;
@@ -84,7 +84,7 @@ void partial_selection_sort(Array* array , int k) {
 }
 
 void partial_insertion_sort(Array* array, int k) {
-    if(k > array->size) return;
+    if(k > array->length) return;
     
     int inserted, j;
     for(int i = 1; i < array->size; i++){
@@ -93,17 +93,19 @@ void partial_insertion_sort(Array* array, int k) {
         if(i > k - 1) {
             if(array->v[i] < array->v[k - 1]) {
                 swap(&array->v[i], &array->v[k - 1]);
-                j = k - 1;
+                j = k - 2;
             
             } else {
                 continue;
             }
-        
         } else {
             j = i - 1;
         }
         
-        for(j; j >= 0 && inserted < array->v[j]; j--){
+        for(j; j >= 0; j--){
+            if(inserted >= array->v[j])
+                break;
+            
             array->v[j + 1] = array->v[j];
         }
 
@@ -112,13 +114,36 @@ void partial_insertion_sort(Array* array, int k) {
 }
 
 void partial_shell_sort(Array* array, int k) {
-    if(k > array->size) return;
+    if(k > array->length) return;
+}
+
+static void partition(int* array, int begin, int end, int k){
+    if(begin >= end) return;
+    
+    int pivo = begin;
+    int j = begin + 1;
+
+    for(int i = begin; i <= end; i++){
+        if(array[i] < array[pivo]){
+            swap(&array[j], &array[i]);
+            j++;
+        }
+    }
+
+    swap(&array[pivo], &array[j - 1]);
+    
+    pivo = j - 1;
+
+    partition(array, begin, pivo - 1, k);
+    if(pivo - begin < k){
+        partition(array, pivo + 1, end, k);    
+    }
 }
 
 void partial_quick_sort(Array* array, int k) {
-    if(k > array->size) return;
+    if(k > array->length) return;
 }
 
 void partial_heap_sort(Array* array, int k) {
-    if(k > array->size) return;
+    if(k > array->length) return;
 }

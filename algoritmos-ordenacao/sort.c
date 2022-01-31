@@ -85,8 +85,8 @@ void shell_sort(int* array, int length){
     }
 }
 
-void partition(int * array, int begin, int end){
-    if(begin >= end ) return;
+void partition(int* array, int begin, int end){
+    if(begin >= end) return;
     
     int pivo = begin;
     int j = begin + 1;

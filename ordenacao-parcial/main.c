@@ -10,7 +10,8 @@ int main(){
     print_array(array);
 
     //partial_selection_sort(array, 5);
-    partial_insertion_sort(array, 20);
+    partial_insertion_sort(array, 5);
+    partial_quick_sort(array, 5);
 
     print_array(array);
 
