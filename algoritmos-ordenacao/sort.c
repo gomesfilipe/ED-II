@@ -73,7 +73,7 @@ void shell_sort(int* array, int length){
     int inserted, j;
     for(int gap = length / 2; gap > 0; gap /= 2){
 
-        for(int i = gap; i < length; i += gap){
+        for(int i = gap; i < length; i++){
             inserted = array[i];
 
             for(j = i - gap; j >= 0 && inserted < array[j]; j -= gap){

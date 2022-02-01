@@ -4,14 +4,15 @@
 #include "partial_sorting.h"
 
 int main(){
-    Array* array = create_array(10);
+    Array* array = create_array(20);
     fill_array(array);
     
     print_array(array);
 
     //partial_selection_sort(array, 5);
-    partial_insertion_sort(array, 5);
-    partial_quick_sort(array, 5);
+    // partial_insertion_sort(array, 5);
+    // partial_quick_sort(array, 5);
+    partial_shell_sort(array, 5);
 
     print_array(array);
 

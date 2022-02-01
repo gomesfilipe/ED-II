@@ -115,7 +115,30 @@ void partial_insertion_sort(Array* array, int k) {
 
 void partial_shell_sort(Array* array, int k) {
     if(k > array->length) return;
-}
+    //int qtd=0;
+    int gap;
+    for(gap = 1; gap < array->size; gap = 3 * gap + 1); //Calculando gap
+    gap = (gap - 1) / 3; //ajustando gap
+
+    int inserted, j;
+    for(gap; gap > 0; gap = (gap - 1) / 3){
+        for(int i = gap; i < array->size; i++){
+            //if(qtd >= k-1) break;
+            
+            inserted = array->v[i];  
+
+            for(j = i - gap; j >= 0 ; j -= gap){
+                if(inserted >= array->v[j])
+                    break;
+                
+                array->v[j + gap] = array->v[j];
+                //qtd++;
+            }
+
+            array->v[j + gap] = inserted;
+        }
+    }
+}//qtd <= k-1
 
 static void partition(int* array, int begin, int end, int k){
     if(begin >= end) return;
