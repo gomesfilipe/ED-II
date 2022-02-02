@@ -1,5 +1,8 @@
 #include "partial_sorting.h"
 
+#define TRUE 1
+#define FALSE 0
+
 struct array {
     int* v;
     int size;    //max quantity
@@ -39,9 +42,14 @@ int get_length(Array* array) {
     return array->length;
 }
 
+int get_element(Array* array, int index){
+    return array->v[index];
+}
+
 int is_full(Array* array) {
     return array->length == array->size;
 }
+
 
 void insert_element_array(Array* array, int element) {
     if(is_full(array)) {
@@ -66,33 +74,61 @@ void swap(int* a, int* b) {
     *b = aux;
 }
 
-void partial_selection_sort(Array* array , int k) {
-    if(k > array->length) return;
+//Pegar os k maiores!
+Report* partial_selection_sort(Array* array , int k) {
+    Report* r = create_report(k);
+    if(k > array->length) return NULL;
     
-    int min = 0;
-    // int trocas = 0;
+    clock_t start = clock();
+
+    int max;
+    
     for(int i = 0; i < k ; i++){
-        min = i;
+        max = i;
         for(int j = i + 1 ; j < array->size ; j++) {
-            if(array->v[j] < array->v[min]) 
-                min = j;   
+            if(array->v[j] > array->v[max])
+                max = j;   
+            increment_comparation(r);
         }
-        swap(&array->v[i], &array->v[min]);
-        // trocas++;
+        swap(&array->v[i], &array->v[max]);
+        increment_swap(r);
     }
-    // printf("%d trocas\n", trocas);   
+
+    clock_t end = clock();
+   
+    double time = ((double) (end - start)) / CLOCKS_PER_SEC;
+    set_time(r, time);
+
+    fill_array_topK(r, array, FALSE);
+
+    return r; 
 }
 
-void partial_insertion_sort(Array* array, int k) {
-    if(k > array->length) return;
-    
+// clock_t start, end;
+//     double cpu_time_used;
+//     start = clock();
+
+//     sort_function(array, length);
+
+//     end = clock();
+//     cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
+
+Report* partial_insertion_sort(Array* array, int k) {
+    if(k > array->length) return NULL;
+
+    Report* r = create_report(k);
+
+    clock_t start = clock();
+
     int inserted, j;
     for(int i = 1; i < array->size; i++){
         inserted = array->v[i];
         
         if(i > k - 1) {
-            if(array->v[i] < array->v[k - 1]) {
+            increment_comparation(r);
+            if(array->v[i] > array->v[k - 1]) {
                 swap(&array->v[i], &array->v[k - 1]);
+                increment_swap(r);
                 j = k - 2;
             
             } else {
@@ -103,18 +139,28 @@ void partial_insertion_sort(Array* array, int k) {
         }
         
         for(j; j >= 0; j--){
-            if(inserted >= array->v[j])
+            increment_comparation(r);
+            if(inserted <= array->v[j])
                 break;
             
+            increment_swap(r);
             array->v[j + 1] = array->v[j];
         }
 
         array->v[j + 1] = inserted;
     }
+
+    clock_t end = clock();
+   
+    double time = ((double) (end - start)) / CLOCKS_PER_SEC;
+    set_time(r, time);
+
+    fill_array_topK(r, array, FALSE);
+    return r;
 }
 
-void partial_shell_sort(Array* array, int k) {
-    if(k > array->length) return;
+Report* partial_shell_sort(Array* array, int k) {
+    if(k > array->length) return NULL;
     //int qtd=0;
     int gap;
     for(gap = 1; gap < array->size; gap = 3 * gap + 1); //Calculando gap
@@ -138,35 +184,95 @@ void partial_shell_sort(Array* array, int k) {
             array->v[j + gap] = inserted;
         }
     }
+    return NULL;
 }//qtd <= k-1
 
-static void partition(int* array, int begin, int end, int k){
+
+
+
+static void partition(int* array, int begin, int end, int k, Report* report){
     if(begin >= end) return;
     
     int pivo = begin;
     int j = begin + 1;
 
     for(int i = begin; i <= end; i++){
-        if(array[i] < array[pivo]){
+        if(array[i] > array[pivo]){
             swap(&array[j], &array[i]);
+            increment_swap(report);
             j++;
         }
+        increment_comparation(report);
     }
 
     swap(&array[pivo], &array[j - 1]);
+    increment_swap(report);
     
     pivo = j - 1;
 
-    partition(array, begin, pivo - 1, k);
+    partition(array, begin, pivo - 1, k, report);
     if(pivo - begin < k){
-        partition(array, pivo + 1, end, k);    
+        partition(array, pivo + 1, end, k, report);    
     }
 }
 
-void partial_quick_sort(Array* array, int k) {
-    if(k > array->length) return;
+Report* partial_quick_sort(Array* array, int k) {
+    if(k > array->length) return NULL;
+    
+    Report* r = create_report(k);
+    clock_t start = clock();
+
+    partition(array->v, 0, array->size - 1, k, r);
+    
+    clock_t end = clock();
+
+    double time = ((double) (end - start)) / CLOCKS_PER_SEC;
+    set_time(r, time);
+    fill_array_topK(r, array, FALSE);
+    return r;
 }
 
-void partial_heap_sort(Array* array, int k) {
-    if(k > array->length) return;
+static void min_heapify(Array* array, int size, int i, Report* report) {
+    // Find largest among root, left child and right child
+    int small = i;  //i eh a posiçao do pai
+    int left = 2 * i + 1;
+    int right = 2 * i + 2;
+      
+    if(left < size && array->v[left] > array->v[small])
+        small = left;
+    increment_comparation(report);
+    
+    if(right < size && array->v[right] > array->v[small])
+        small = right;
+    increment_comparation(report);    
+
+    increment_comparation(report);
+    if(small != i){
+        swap(&array->v[i], &array->v[small]);
+        increment_swap(report);
+        min_heapify(array, size, small, report);
+    }
+}
+
+Report* partial_heap_sort(Array* array, int k) {   
+    if(k > array->length) return NULL;
+
+    Report* r = create_report(k);
+    clock_t start = clock();
+    
+    for (int i = array->size / 2 - 1; i >= 0; i--) 
+        min_heapify(array, array->size, i, r);
+
+    for (int i = array->size - 1;  i >= array->size - k; i--) {
+        swap(&array->v[0], &array->v[i]); 
+        increment_swap(r); 
+        min_heapify(array, i, 0, r);
+    } 
+    
+    clock_t end = clock();
+
+    double time = ((double) (end - start)) / CLOCKS_PER_SEC;
+    set_time(r, time);
+    fill_array_topK(r, array, TRUE);
+    return r;
 }

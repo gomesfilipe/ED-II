@@ -7,6 +7,9 @@
 
 typedef struct array Array;
 
+#include "report.h"
+
+
 /**
  * @brief Constructor of an array object.
  * @param size Array's size.
@@ -47,12 +50,14 @@ int get_size(Array* array);
  */
 int get_length(Array* array);
 
+int get_element(Array* array, int index);
+
 /**
  * @brief Sorts the first k elements by selection sort algorithm.
  * @param array Array which will be partial sorted.
  * @param k Number of elements which will be sorted.
  */
-void partial_selection_sort(Array* array, int k);
+Report* partial_selection_sort(Array* array, int k);
 
 /**
  * @brief Checks if the array is full.
@@ -86,27 +91,29 @@ void swap(int* a, int* b);
  * @param array Array which will be partial sorted.
  * @param k Number of elements which will be sorted.
  */
-void partial_insertion_sort(Array* array , int k);
+Report* partial_insertion_sort(Array* array , int k);
 
 /**
  * @brief Sorts the first k elements by shell sort algorithm.
  * @param array Array which will be partial sorted.
  * @param k Number of elements which will be sorted.
  */
-void partial_shell_sort(Array* array, int k);
+Report* partial_shell_sort(Array* array, int k);
 
 /**
  * @brief Sorts the first k elements by quick sort algorithm.
  * @param array Array which will be partial sorted.
  * @param k Number of elements which will be sorted.
  */
-void partial_quick_sort(Array* array, int k);
+Report* partial_quick_sort(Array* array, int k);
 
 /**
  * @brief Sorts the first k elements by heap sort algorithm.
  * @param array Array which will be partial sorted.
  * @param k Number of elements which will be sorted.
  */
-void partial_heap_sort(Array* array, int k);
+Report* partial_heap_sort(Array* array, int k);
+
+//void heapSort(Array* array);
 
 #endif
