@@ -149,6 +149,8 @@ Report* partial_insertion_sort(Array* array, int k) {
 Report* partial_shell_sort(Array* array, int k) {
     if(k > array->length) return NULL;
     //int qtd=0;
+    Report* report = create_report(k, "shellsort", array->size);
+
     int gap;
     for(gap = 1; gap < array->size; gap = 3 * gap + 1); //Calculando gap
     gap = (gap - 1) / 3; //ajustando gap
@@ -171,8 +173,8 @@ Report* partial_shell_sort(Array* array, int k) {
             array->v[j + gap] = inserted;
         }
     }
-    return NULL;
-}//qtd <= k-1
+    return report;
+}
 
 static void partition(int* array, int begin, int end, int k, Report* report){
     if(begin >= end) return;

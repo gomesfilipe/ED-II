@@ -21,6 +21,7 @@ int main(int argc, char** argv){
 
     build_report(array, k, report, alg, fileName);
 
+    free_array(array);
     return 0;
 }
 
@@ -29,5 +30,5 @@ int main(int argc, char** argv){
     Testar mais casos
     Fazer a shell sort
     Fazer relatorio
-
+    Documentar tudo do 0
 */

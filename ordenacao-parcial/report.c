@@ -71,7 +71,7 @@ void print_statistics(Report* report){
 
 //É o numebr 1 que ta na especificacao
 void print_k_elements(Report* report){
-    for(int i = 0 ; i < get_size(report->topK) ; i++){
+    for(int i = 0; i < get_size(report->topK) ; i++){
         printf("%d\n", get_element(report->topK, i));
     }
 }

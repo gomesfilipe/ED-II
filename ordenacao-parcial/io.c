@@ -1,7 +1,7 @@
 #include "io.h"
 
 typedef Report* (*fptr) (Array*, int);
-#define TAM 26
+#define TAM 123 // caractere z é 122 na tabela ascii
 #define QTDALGORITHMS 5  
 
 void split(char** argv, char* alg, char* report, int* k, char* fileName){
@@ -82,9 +82,11 @@ void build_report(Array* array, int k, int number, char alg, char* fileName){
     
     }else if(alg == 's' || alg =='i' || alg == 'e' || alg == 'h' || alg == 'q'){
         fptr* table = dispatch_table();
+        printf("PONTEIRO: [%p]\n", table[alg]);
         Report* r = table[alg](array, k);
         print_output(r, number, fileName);
-        free(table);
+        free_dispatch_table(table);
+        free_report(r);
     
     } else{
         printf("Invalid argument.\n");
