@@ -11,7 +11,6 @@ struct array {
 
 Array* create_array(int size) {
     Array* array = (Array*) malloc(sizeof(Array));
-    // array->v = (int*) calloc (size, sizeof(int));
     array->v = (int*) malloc (sizeof(int) * size);
     array->size = size;
     array->length = 0;
@@ -50,7 +49,6 @@ int is_full(Array* array) {
     return array->length == array->size;
 }
 
-
 void insert_element_array(Array* array, int element) {
     if(is_full(array)) {
         return;
@@ -60,8 +58,7 @@ void insert_element_array(Array* array, int element) {
 }
 
 void fill_array(Array* array) {
-    srand(time(NULL));
-
+    //srand(time(NULL));
     for(int i = 0; i < array->size; i++) {
         insert_element_array(array, rand() % 100);
     }
@@ -74,9 +71,8 @@ void swap(int* a, int* b) {
     *b = aux;
 }
 
-//Pegar os k maiores!
 Report* partial_selection_sort(Array* array , int k) {
-    Report* r = create_report(k);
+    Report* r = create_report(k, "seleção", array->length);
     if(k > array->length) return NULL;
     
     clock_t start = clock();
@@ -104,19 +100,10 @@ Report* partial_selection_sort(Array* array , int k) {
     return r; 
 }
 
-// clock_t start, end;
-//     double cpu_time_used;
-//     start = clock();
-
-//     sort_function(array, length);
-
-//     end = clock();
-//     cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
-
 Report* partial_insertion_sort(Array* array, int k) {
     if(k > array->length) return NULL;
 
-    Report* r = create_report(k);
+    Report* r = create_report(k, "inserção", array->length);
 
     clock_t start = clock();
 
@@ -187,9 +174,6 @@ Report* partial_shell_sort(Array* array, int k) {
     return NULL;
 }//qtd <= k-1
 
-
-
-
 static void partition(int* array, int begin, int end, int k, Report* report){
     if(begin >= end) return;
     
@@ -219,7 +203,7 @@ static void partition(int* array, int begin, int end, int k, Report* report){
 Report* partial_quick_sort(Array* array, int k) {
     if(k > array->length) return NULL;
     
-    Report* r = create_report(k);
+    Report* r = create_report(k, "quicksort", array->length);
     clock_t start = clock();
 
     partition(array->v, 0, array->size - 1, k, r);
@@ -257,7 +241,7 @@ static void min_heapify(Array* array, int size, int i, Report* report) {
 Report* partial_heap_sort(Array* array, int k) {   
     if(k > array->length) return NULL;
 
-    Report* r = create_report(k);
+    Report* r = create_report(k, "heapsort", array->length);
     clock_t start = clock();
     
     for (int i = array->size / 2 - 1; i >= 0; i--) 
@@ -275,4 +259,13 @@ Report* partial_heap_sort(Array* array, int k) {
     set_time(r, time);
     fill_array_topK(r, array, TRUE);
     return r;
+}
+
+Array* copy_array(Array* array){
+    Array* new = create_array(array->size);
+
+    for(int i = 0; i < new->size; i++){
+        insert_element_array(new, get_element(array, i));
+    }
+    return new;
 }

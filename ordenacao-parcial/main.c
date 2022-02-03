@@ -3,35 +3,31 @@
 #include <time.h>
 #include "partial_sorting.h"
 #include "report.h"
+#include "io.h"
+#include <string.h>
 
-int main(){
-    Array* array = create_array(20);
-    fill_array(array);
-    
-    print_array(array);
+int main(int argc, char** argv){
+    if(argc != 4){
+        printf("Incorrect number of parameters!\n");
+        return 1;
+    }
 
-    // Report* r1 = partial_selection_sort(array, 5);
-    //Report* r2 = partial_insertion_sort(array, 5);
-    //Report* r3 = partial_quick_sort(array, 5);
-    //Report* r4 =partial_shell_sort(array, 5); //esta errado
-    Report* r5 = partial_heap_sort(array, 5);
+    char alg, report;
+    int k;
+    char fileName[100];
+    split(argv, &alg, &report, &k, fileName);  
 
-    // heapSort(array);
-    
-    print_array(array);
-    printf("\n-------------------------------\n\n");
-    print_report(r5);
+    Array* array = read_file(fileName);
 
-    free_array(array);
-    free_report(r5);
+    build_report(array, k, report, alg, fileName);
+
     return 0;
-
 }
 
 /*
-
-  Como a impressao deve ser feita
-  [algoritmo	  arquivo	  tam.	 T(top)	 comp. 	trocas	tempo(s)]
-  seleção	  ./in/5.txt	5	  5	      x	        y	  0.00001
+    Consertar tempo de CPU, so esta pegando 00000
+    Testar mais casos
+    Fazer a shell sort
+    Fazer relatorio
 
 */

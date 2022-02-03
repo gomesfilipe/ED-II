@@ -116,4 +116,6 @@ Report* partial_heap_sort(Array* array, int k);
 
 //void heapSort(Array* array);
 
+Array* copy_array(Array* array);
+
 #endif
