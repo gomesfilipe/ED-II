@@ -52,7 +52,7 @@ static void free_dispatch_table(fptr* table){
     free(table);
 }
 
-static void print_output(Report* report, int number, char* fileName){
+void print_output(Report* report, int number, char* fileName){
     switch (number){
         case '1': print_k_elements(report); break;
         case '2': print_statistics(report); break;

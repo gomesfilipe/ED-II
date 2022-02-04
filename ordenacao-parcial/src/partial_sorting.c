@@ -218,25 +218,25 @@ Report* partial_quick_sort(Array* array, int k) {
     return r;
 }
 
-static void min_heapify(Array* array, int size, int i, Report* report) {
+static void max_heapify(Array* array, int size, int i, Report* report) {
     // Find largest among root, left child and right child
-    int small = i;  //i eh a posiçao do pai
+    int largest = i;  //i eh a posiçao do pai
     int left = 2 * i + 1;
     int right = 2 * i + 2;
       
-    if(left < size && array->v[left] > array->v[small])
-        small = left;
+    if(left < size && array->v[left] > array->v[largest])
+        largest = left;
     increment_comparation(report);
     
-    if(right < size && array->v[right] > array->v[small])
-        small = right;
+    if(right < size && array->v[right] > array->v[largest])
+        largest = right;
     increment_comparation(report);    
 
     increment_comparation(report);
-    if(small != i){
-        swap(&array->v[i], &array->v[small]);
+    if(largest != i){
+        swap(&array->v[i], &array->v[largest]);
         increment_swap(report);
-        min_heapify(array, size, small, report);
+        max_heapify(array, size, largest, report);
     }
 }
 
@@ -247,12 +247,12 @@ Report* partial_heap_sort(Array* array, int k) {
     clock_t start = clock();
     
     for (int i = array->size / 2 - 1; i >= 0; i--) 
-        min_heapify(array, array->size, i, r);
+        max_heapify(array, array->size, i, r);
 
     for (int i = array->size - 1;  i >= array->size - k; i--) {
         swap(&array->v[0], &array->v[i]); 
         increment_swap(r); 
-        min_heapify(array, i, 0, r);
+        max_heapify(array, i, 0, r);
     } 
     
     clock_t end = clock();

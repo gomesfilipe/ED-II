@@ -1,8 +1,4 @@
 TARGET := tp1
-COMMAND := -1s
-TOPK := 5
-PATH := inputs/20.txt
-
 LIBS := -lm
 CFLAGS := -g -O3 -Wno-unused-result
 #CFLAGS := -g -O3 
@@ -39,10 +35,6 @@ clean: # Remove pasta com os arquivos objeto.
 	-rm -f $(TARGET)
 
 run: # Executa o programa com valgrind.
-	valgrind ./$(TARGET) $(COMMAND) $(TOPK) $(PATH)
+	./tp1 -1h 100 inputs/aleatorio1/aleatorio/100000.txt
 
-# reset: # Remove todo o conteúdo da pasta.
-# 	-rm -f -r data/Saida/*
-
-
-#./a.out [-123iseqha] top_T caminho_arquivo
+# ./a.out [-123iseqha] top_T caminho_arquivo

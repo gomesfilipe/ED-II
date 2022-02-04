@@ -23,34 +23,34 @@ Array* create_array(int size);
 void free_array(Array* array);
 
 /**
- * @brief Prints the array element on stdin.
+ * @brief Prints the array's elements on stdout.
  * @param array Array which will be printed.
  */
 void print_array(Array* array);
 
 /**
  * @brief Gets the pointer to array of integers.
- * @param array Array which will have your array of integers got.
+ * @param array Array which will have its array of integers gotten.
  * @return Returns the pointer to array of integers. 
  */
 int* get_array(Array* array);
 
 /**
  * @brief Gets the Array's size.
- * @param array Array which will have your size got.
- * @return Returns theArray's size. 
+ * @param array Array which will have its size gotten.
+ * @return Returns the Array's size. 
  */
 int get_size(Array* array);
 
 /**
  * @brief Gets the Array's length.
- * @param array Array which will have your length got.
+ * @param array Array which will have its length gotten.
  * @return Returns Array's length.
  */
 int get_length(Array* array);
 
 /**
- * @brief Gets the Array's element at a specific index.
+ * @brief Gets the Array's element at an specific index.
  * @param array Array which will have one of your elements gotten.
  * @return Returns the element at a specific index of array.
  */
@@ -59,13 +59,13 @@ int get_element(Array* array, int index);
 /**
  * @brief Checks if the array is full.
  * @param array Array which will be checked.
- * @return 1 case true or 0 case false.
+ * @return 1 if the array is full and 0 if it's not.
  */
 int is_full(Array* array);
 
 /**
- * @brief Inserts an element at the end of the array if him is not full. 
- * @param array Array which will be an element inserted.
+ * @brief Inserts an element at the end of the array if the array isn't full. 
+ * @param array Array which will have an element inserted.
  * @param element Element which will be inserted.
  */
 void insert_element_array(Array* array, int element);
@@ -130,7 +130,7 @@ Report* partial_heap_sort(Array* array, int k);
 
 /**
  * @brief Creates an identical array with the same values 
- * in the fields, but another reference.  
+ * in the fields, but in another reference.  
  * @param array Array which will be copied.
  * @return Identical array. 
  */
