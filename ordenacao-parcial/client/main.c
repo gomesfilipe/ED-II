@@ -26,7 +26,7 @@ int main(int argc, char** argv){
 }
 
 /*
-    Consertar tempo de CPU, so esta pegando 00000
+    Consertar tempo de CPU, so esta pegando 00000  ok
     Fazer a shell sort
     Fazer relatorio
     Documentar tudo do 0

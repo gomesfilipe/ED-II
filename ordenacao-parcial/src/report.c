@@ -60,7 +60,6 @@ void fill_array_topK(Report* report, Array* array, int is_heap){
     }
 }
 
-//eh o number 2 q ta na especificacao
 void print_statistics(Report* report){
     printf("Tempo de CPU: %.6f\n", report->time);
     printf("Comparações: %d\n", report->comparation);
@@ -69,19 +68,12 @@ void print_statistics(Report* report){
     //print_array(report->topK);
 }
 
-
-//É o numebr 1 que ta na especificacao
 void print_k_elements(Report* report){
     for(int i = 0; i < get_size(report->topK) ; i++){
         printf("%d\n", get_element(report->topK, i));
     }
     printf("\n");
 }
-
-//eh o number 3 q ta na especificacao 
-//[algoritmo	arquivo	tam.	T(top)	comp. 	trocas	tempo(s)]
-
-//seleção	./in/5.txt	5	5	x	y	0.00001
 
 void print_date(Report* report, char* fileName){
     //printf("[algoritmo	arquivo	tam.	T(top)	comp. 	trocas	tempo(s)]\n");

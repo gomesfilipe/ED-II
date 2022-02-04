@@ -58,7 +58,7 @@ void insert_element_array(Array* array, int element) {
 }
 
 void fill_array(Array* array) {
-    //srand(time(NULL));
+    srand(time(NULL));
     for(int i = 0; i < array->size; i++) {
         insert_element_array(array, rand() % 100);
     }

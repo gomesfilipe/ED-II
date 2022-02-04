@@ -49,14 +49,12 @@ int get_size(Array* array);
  */
 int get_length(Array* array);
 
-int get_element(Array* array, int index);
-
 /**
- * @brief Sorts the first k elements by selection sort algorithm.
- * @param array Array which will be partial sorted.
- * @param k Number of elements which will be sorted.
+ * @brief Gets the Array's element at a specific index.
+ * @param array Array which will have one of your elements gotten.
+ * @return Returns the element at a specific index of array.
  */
-Report* partial_selection_sort(Array* array, int k);
+int get_element(Array* array, int index);
 
 /**
  * @brief Checks if the array is full.
@@ -86,33 +84,56 @@ void fill_array(Array* array);
 void swap(int* a, int* b);
 
 /**
- * @brief Sorts the first k elements by insertion sort algorithm.
+ * @brief Sorts the first k elements by selection sort algorithm 
+ * and generates a report about its execution.
  * @param array Array which will be partial sorted.
  * @param k Number of elements which will be sorted.
+ * @return Report with dates about the sorting.
+ */
+Report* partial_selection_sort(Array* array, int k);
+
+/**
+ * @brief Sorts the first k elements by insertion sort algorithm
+ * and generates a report about its execution. 
+ * @param array Array which will be partial sorted.
+ * @param k Number of elements which will be sorted.
+ * @return Report with dates about the sorting.
  */
 Report* partial_insertion_sort(Array* array , int k);
 
 /**
- * @brief Sorts the first k elements by shell sort algorithm.
+ * @brief Sorts the first k elements by shell sort algorithm
+ * and generates a report about its execution. 
  * @param array Array which will be partial sorted.
  * @param k Number of elements which will be sorted.
+ * @return Report with dates about the sorting.
  */
 Report* partial_shell_sort(Array* array, int k);
 
 /**
- * @brief Sorts the first k elements by quick sort algorithm.
+ * @brief Sorts the first k elements by quick sort algorithm
+ * and generates a report about its execution. 
  * @param array Array which will be partial sorted.
  * @param k Number of elements which will be sorted.
+ * @return Report with dates about the sorting.
  */
 Report* partial_quick_sort(Array* array, int k);
 
 /**
- * @brief Sorts the first k elements by heap sort algorithm.
+ * @brief Sorts the first k elements by heap sort algorithm
+ * and generates a report about its execution. 
  * @param array Array which will be partial sorted.
  * @param k Number of elements which will be sorted.
+ * @return Report with dates about the sorting.
  */
 Report* partial_heap_sort(Array* array, int k);
 
+/**
+ * @brief Creates an identical array with the same values 
+ * in the fields, but another reference.  
+ * @param array Array which will be copied.
+ * @return Identical array. 
+ */
 Array* copy_array(Array* array);
 
 #endif
