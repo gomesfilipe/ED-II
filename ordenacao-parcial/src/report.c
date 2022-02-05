@@ -3,8 +3,10 @@
 struct report {
     char* algorithm;
     int original_size;
-    int comparation;
-    int swap;
+    unsigned long long comparation;
+    unsigned long long swap;
+    // int comparation;
+    // int swap;
     double time;
     Array* topK;
 };
@@ -63,8 +65,10 @@ void fill_array_topK(Report* report, Array* array, int is_heap){
 void print_statistics(Report* report){
     printf("Algoritmo: %s\n", report->algorithm);
     printf("Tempo de CPU: %.6f\n", report->time);
-    printf("Comparações: %d\n", report->comparation);
-    printf("Trocas: %d\n", report->swap);
+    printf("Comparações: %llu\n", report->comparation);
+    // printf("Comparações: %d\n", report->comparation);
+    printf("Trocas: %llu\n", report->swap);
+    // printf("Trocas: %d\n", report->swap);
     printf("\n");
     //print_array(report->topK);
 }
@@ -78,11 +82,12 @@ void print_k_elements(Report* report){
 
 void print_date(Report* report, char* fileName){
     //printf("[algoritmo	arquivo	tam.	T(top)	comp. 	trocas	tempo(s)]\n");
+    
     printf("%s    ", report->algorithm ); 
     printf("%s    ", fileName);
     printf("%d    ", report->original_size);
     printf("%d    ", get_size(report->topK));
-    printf("%d    ", report->comparation);
-    printf("%d    ", report->swap);
+    printf("%llu    ", report->comparation);
+    printf("%llu    ", report->swap);
     printf("%.5f    \n\n", report->time);
 }
