@@ -35,6 +35,6 @@ clean: # Remove pasta com os arquivos objeto.
 	-rm -f $(TARGET)
 
 run: # Executa o programa com valgrind.
-	./tp1 -1h 100 inputs/aleatorio1/aleatorio/100000.txt
+	./tp1 -2q 100 inputs/quase-ordenado/quase-ordenado/100000.txt
 
 # ./a.out [-123iseqha] top_T caminho_arquivo
