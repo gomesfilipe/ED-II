@@ -176,22 +176,22 @@ Report* partial_shell_sort(Array* array, int k) {
     return report;
 }
 
-static void partition(int* array, int begin, int end, int k, Report* report){
+static void partition(Array* array, int begin, int end, int k, Report* report){
     if(begin >= end) return;
     
     int pivo = begin;
     int j = begin + 1;
 
     for(int i = begin; i <= end; i++){
-        if(array[i] > array[pivo]){
-            swap(&array[j], &array[i]);
+        if(array->v[i] > array->v[pivo]){
+            swap(&array->v[j], &array->v[i]);
             increment_swap(report);
             j++;
         }
         increment_comparation(report);
     }
 
-    swap(&array[pivo], &array[j - 1]);
+    swap(&array->v[pivo], &array->v[j - 1]);
     increment_swap(report);
     
     pivo = j - 1;
@@ -202,13 +202,39 @@ static void partition(int* array, int begin, int end, int k, Report* report){
     }
 }
 
+// static void partition(int* array, int begin, int end, int k, Report* report){
+//     if(begin >= end) return;
+    
+//     int pivo = begin;
+//     int j = begin + 1;
+
+//     for(int i = begin; i <= end; i++){
+//         if(array[i] > array[pivo]){
+//             swap(&array[j], &array[i]);
+//             increment_swap(report);
+//             j++;
+//         }
+//         increment_comparation(report);
+//     }
+
+//     swap(&array[pivo], &array[j - 1]);
+//     increment_swap(report);
+    
+//     pivo = j - 1;
+
+//     partition(array, begin, pivo - 1, k, report);
+//     if(pivo - begin < k){
+//         partition(array, pivo + 1, end, k, report);    
+//     }
+// }
+
 Report* partial_quick_sort(Array* array, int k) {
     if(k > array->length) return NULL;
     
     Report* r = create_report(k, "quicksort", array->length);
     clock_t start = clock();
 
-    partition(array->v, 0, array->size - 1, k, r);
+    partition(array, 0, array->size - 1, k, r);
     
     clock_t end = clock();
 
