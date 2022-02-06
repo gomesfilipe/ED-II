@@ -40,6 +40,5 @@ int main(int argc, char** argv){
 
 /* TODO
     Fazer relatorio
-    Fazer a shell sort
     Resolver segmentation fault: quick sort, pasta quase-ordenado
 */

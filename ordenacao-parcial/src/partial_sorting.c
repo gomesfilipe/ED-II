@@ -146,40 +146,12 @@ Report* partial_insertion_sort(Array* array, int k) {
     return r;
 }
 
-// Report* partial_shell_sort(Array* array, int k) {
-//     if(k > array->length) return NULL;
-//     //int qtd=0;
-//     Report* report = create_report(k, "shellsort", array->size);
-
-//     int gap;
-//     for(gap = 1; gap < array->size; gap = 3 * gap + 1); //Calculando gap
-//     gap = (gap - 1) / 3; //ajustando gap
-
-//     int inserted, j;
-//     for(gap; gap > 0; gap = (gap - 1) / 3){
-//         for(int i = gap; i < array->size; i++){
-//             //if(qtd >= k-1) break;
-            
-//             inserted = array->v[i];  
-
-//             for(j = i - gap; j >= 0 ; j -= gap){
-//                 if(inserted >= array->v[j])
-//                     break;
-                
-//                 array->v[j + gap] = array->v[j];
-//                 //qtd++;
-//             }
-
-//             array->v[j + gap] = inserted;
-//         }
-//     }
-//     return report;
-// }
-
 Report* partial_shell_sort(Array* array, int k) {
     if(k > array->length) return NULL;
     //int qtd=0;
-    Report* report = create_report(k, "shellsort", array->size);
+    Report* r = create_report(k, "shellsort", array->size);
+
+    clock_t start = clock();
 
     int gap;
     for(gap = 1; gap < array->size; gap = 3 * gap + 1); //Calculando gap
@@ -192,8 +164,10 @@ Report* partial_shell_sort(Array* array, int k) {
             
             int kesimo = (i % gap) + (k - 1) * gap;
             if(i > kesimo){ // acima do k-esimo
+                increment_comparation(r);
                 if(array->v[i] > array->v[kesimo]){
                     swap(&array->v[i], &array->v[kesimo]);
+                    increment_swap(r);
                     j = kesimo - gap;
                 
                 } else{
@@ -204,16 +178,25 @@ Report* partial_shell_sort(Array* array, int k) {
             }
 
             for(j; j >= 0 ; j -= gap){
+                increment_comparation(r);
                 if(inserted <= array->v[j])
                     break;
                 
+                increment_swap(r);
                 array->v[j + gap] = array->v[j];
             }
 
             array->v[j + gap] = inserted;
         }
     }
-    return report;
+
+    clock_t end = clock();
+
+    double time = ((double) (end - start)) / CLOCKS_PER_SEC;
+    set_time(r, time);
+
+    fill_array_topK(r, array, FALSE);
+    return r;
 }
 
 static void partition(Array* array, int begin, int end, int k, Report* report){
@@ -241,32 +224,6 @@ static void partition(Array* array, int begin, int end, int k, Report* report){
         partition(array, pivo + 1, end, k, report);    
     }
 }
-
-// static void partition(int* array, int begin, int end, int k, Report* report){
-//     if(begin >= end) return;
-    
-//     int pivo = begin;
-//     int j = begin + 1;
-
-//     for(int i = begin; i <= end; i++){
-//         if(array[i] > array[pivo]){
-//             swap(&array[j], &array[i]);
-//             increment_swap(report);
-//             j++;
-//         }
-//         increment_comparation(report);
-//     }
-
-//     swap(&array[pivo], &array[j - 1]);
-//     increment_swap(report);
-    
-//     pivo = j - 1;
-
-//     partition(array, begin, pivo - 1, k, report);
-//     if(pivo - begin < k){
-//         partition(array, pivo + 1, end, k, report);    
-//     }
-// }
 
 Report* partial_quick_sort(Array* array, int k) {
     if(k > array->length) return NULL;
