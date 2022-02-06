@@ -146,6 +146,36 @@ Report* partial_insertion_sort(Array* array, int k) {
     return r;
 }
 
+// Report* partial_shell_sort(Array* array, int k) {
+//     if(k > array->length) return NULL;
+//     //int qtd=0;
+//     Report* report = create_report(k, "shellsort", array->size);
+
+//     int gap;
+//     for(gap = 1; gap < array->size; gap = 3 * gap + 1); //Calculando gap
+//     gap = (gap - 1) / 3; //ajustando gap
+
+//     int inserted, j;
+//     for(gap; gap > 0; gap = (gap - 1) / 3){
+//         for(int i = gap; i < array->size; i++){
+//             //if(qtd >= k-1) break;
+            
+//             inserted = array->v[i];  
+
+//             for(j = i - gap; j >= 0 ; j -= gap){
+//                 if(inserted >= array->v[j])
+//                     break;
+                
+//                 array->v[j + gap] = array->v[j];
+//                 //qtd++;
+//             }
+
+//             array->v[j + gap] = inserted;
+//         }
+//     }
+//     return report;
+// }
+
 Report* partial_shell_sort(Array* array, int k) {
     if(k > array->length) return NULL;
     //int qtd=0;
@@ -157,17 +187,27 @@ Report* partial_shell_sort(Array* array, int k) {
 
     int inserted, j;
     for(gap; gap > 0; gap = (gap - 1) / 3){
-        for(int i = gap; i < array->size; i++){
-            //if(qtd >= k-1) break;
-            
+        for(int i = gap; i < array->size; i++){    
             inserted = array->v[i];  
+            
+            int kesimo = (i % gap) + (k - 1) * gap;
+            if(i > kesimo){ // acima do k-esimo
+                if(array->v[i] > array->v[kesimo]){
+                    swap(&array->v[i], &array->v[kesimo]);
+                    j = kesimo - gap;
+                
+                } else{
+                    continue;
+                }
+            } else {
+                j = i - gap;
+            }
 
-            for(j = i - gap; j >= 0 ; j -= gap){
-                if(inserted >= array->v[j])
+            for(j; j >= 0 ; j -= gap){
+                if(inserted <= array->v[j])
                     break;
                 
                 array->v[j + gap] = array->v[j];
-                //qtd++;
             }
 
             array->v[j + gap] = inserted;
