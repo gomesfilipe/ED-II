@@ -10,31 +10,32 @@
 #define FALSE 0
 
 int main(int argc, char** argv){
-    // if(argc != 4){
-    //     printf("Incorrect number of parameters!\n");
-    //     return 1;
-    // }
+    if(argc != 4){
+        printf("Incorrect number of parameters!\n");
+        return 1;
+    }
 
-    // int control_keys[TAM] = {FALSE};
-    // int k;
-    // char fileName[100];
-    // split(argv, control_keys, &k, fileName);  
+    int control_keys[TAM] = {FALSE};
+    int k;
+    char fileName[100];
+    split(argv, control_keys, &k, fileName);  
 
-    // Array* array = read_file(fileName);
+    Array* array = read_file(fileName);
 
-    // build_report(array, k, control_keys, fileName);
+    build_report(array, k, control_keys, fileName);
 
-    // free_array(array);
-
-    Array* array = create_array(20);
-    fill_array(array);
-    print_array(array);
-    printf("\n");
-
-    partial_shell_sort(array, 8);
-    print_array(array);
     free_array(array);
 
+    // Array* array = create_array(20);
+    // fill_array(array);
+    // print_array(array);
+    // printf("\n");
+
+    // Report* r = partial_shell_sort(array, 8);
+    // print_array(array);
+    // free_array(array);
+
+    // free_report(r);
     return 0;
 }
 

@@ -162,7 +162,7 @@ Report* partial_shell_sort(Array* array, int k) {
         for(int i = gap; i < array->size; i++){    
             inserted = array->v[i];  
             
-            int kesimo = (i % gap) + (k - 1) * gap;
+            unsigned long long kesimo = (i % gap) + (k - 1) * gap;
             if(i > kesimo){ // acima do k-esimo
                 increment_comparation(r);
                 if(array->v[i] > array->v[kesimo]){
