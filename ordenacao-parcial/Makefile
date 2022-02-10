@@ -29,17 +29,10 @@ $(CLIENT).o: $(CLI)
 $(TARGET): $(OBJECTS)
 	$(CC) $(INCLUDE_PATHS) $(OBJECTS) $(LIBS) -o $@
 
-clean: # Remove pasta com os arquivos objeto.
+clean: # Remove pasta com os arquivos objeto e o executável.
 	-rm -f -r obj
 	-rm -f *.o
 	-rm -f $(TARGET)
 
-run: # Executa o programa com valgrind.
-	./tp1 -2e 10000 inputs/invertido/invertido/100000.txt
-
-run2:
-	./tp1 -2e 10000 inputs/invertido/invertido/1000000.txt
-
-run3:
-	./tp1 -2e 10000 inputs/invertido/invertido/10000000.txt
-# ./a.out [-123iseqha] top_T caminho_arquivo
+run: # Executa o programa com valgrind com uma entrada específica.
+	valgrind ./tp1 -2e 10000 inputs/invertido/invertido/100000.txt

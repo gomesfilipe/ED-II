@@ -26,20 +26,5 @@ int main(int argc, char** argv){
 
     free_array(array);
 
-    // Array* array = create_array(20);
-    // fill_array(array);
-    // print_array(array);
-    // printf("\n");
-
-    // Report* r = partial_shell_sort(array, 8);
-    // print_array(array);
-    // free_array(array);
-
-    // free_report(r);
-    return 0;
+    return 0;    
 }
-
-/* TODO
-    Fazer relatorio
-    Resolver segmentation fault: quick sort, pasta quase-ordenado
-*/
