@@ -5,8 +5,8 @@
 
 struct array {
     int* v;
-    int size;    //max quantity
-    int length;  //atual quantity
+    int size;    // Total de elementos que o vetor suporta.
+    int length;  // Quantidade de elementos presente no vetor.
 };
 
 Array* create_array(int size) {
@@ -72,21 +72,22 @@ void swap(int* a, int* b) {
 }
 
 Report* partial_selection_sort(Array* array , int k) {
-    Report* r = create_report(k, "seleção", array->length);
     if(k > array->length) return NULL;
     
+    Report* r = create_report(k, "seleção", array->length);
+
     clock_t start = clock();
 
     int max;
     
     for(int i = 0; i < k ; i++){
         max = i;
-        for(int j = i + 1 ; j < array->size ; j++) {
+        for(int j = i + 1 ; j < array->size ; j++) { // Pega o maior elemento.
             if(array->v[j] > array->v[max])
                 max = j;   
             increment_comparation(r);
         }
-        swap(&array->v[i], &array->v[max]);
+        swap(&array->v[i], &array->v[max]); // Coloca o maior no início.
         increment_swap(r);
     }
 
@@ -111,17 +112,18 @@ Report* partial_insertion_sort(Array* array, int k) {
     for(int i = 1; i < array->size; i++){
         inserted = array->v[i];
         
-        if(i > k - 1) {
+        // Verifica se está na k-ésima posição ou não, para definir onde começar o próximo laço.
+        if(i > k - 1) { 
             increment_comparation(r);
-            if(array->v[i] > array->v[k - 1]) {
+            if(array->v[i] > array->v[k - 1]) { // Se for maior que o k-ésimo elemento, faz o swap e ajusta o j para ordenar parcialmente.
                 swap(&array->v[i], &array->v[k - 1]);
                 increment_swap(r);
                 j = k - 2;
             
-            } else {
+            } else { // Se não for maior, ignora e passa para o próximo loop.
                 continue;
             }
-        } else {
+        } else { // Antes do k-ésimo, ajusta j para fazer a lógica normal do insertion sort.
             j = i - 1;
         }
         
@@ -131,10 +133,10 @@ Report* partial_insertion_sort(Array* array, int k) {
                 break;
             
             increment_swap(r);
-            array->v[j + 1] = array->v[j];
+            array->v[j + 1] = array->v[j]; 
         }
 
-        array->v[j + 1] = inserted;
+        array->v[j + 1] = inserted; // Inserindo elemento em sua posição correta.
     }
 
     clock_t end = clock();
@@ -148,29 +150,29 @@ Report* partial_insertion_sort(Array* array, int k) {
 
 Report* partial_shell_sort(Array* array, int k) {
     if(k > array->length) return NULL;
-    //int qtd=0;
+
     Report* r = create_report(k, "shellsort", array->size);
 
     clock_t start = clock();
 
     int gap;
-    for(gap = 1; gap < array->size; gap = 3 * gap + 1); //Calculando gap
-    gap = (gap - 1) / 3; //ajustando gap
+    for(gap = 1; gap < array->size; gap = 3 * gap + 1); // Calculando gap.
+    gap = (gap - 1) / 3; // Ajustando para ser menor que o tamanho do vetor.
 
     int inserted, j;
     for(gap; gap > 0; gap = (gap - 1) / 3){
         for(int i = gap; i < array->size; i++){    
             inserted = array->v[i];  
             
-            unsigned long long kesimo = (i % gap) + (k - 1) * gap;
-            if(i > kesimo){ // acima do k-esimo
+            unsigned long long kesimo = (i % gap) + (k - 1) * gap; // índice do k-ésimo elemento no subvetor
+            if(i > kesimo){ // Verifica se está na k-ésima posição ou não do subvetor, para definir onde começar o próximo laço. 
                 increment_comparation(r);
-                if(array->v[i] > array->v[kesimo]){
+                if(array->v[i] > array->v[kesimo]){ // Se for maior que o k-ésimo elemento do subvetor, faz o swap e ajusta o j para ordená-lo parcialmente.
                     swap(&array->v[i], &array->v[kesimo]);
                     increment_swap(r);
                     j = kesimo - gap;
                 
-                } else{
+                } else{ // Se não for maior, ignora e passa para o próximo loop.
                     continue;
                 }
             } else {
@@ -186,7 +188,7 @@ Report* partial_shell_sort(Array* array, int k) {
                 array->v[j + gap] = array->v[j];
             }
 
-            array->v[j + gap] = inserted;
+            array->v[j + gap] = inserted; // Inserindo elemento em sua posição correta.
         }
     }
 
@@ -202,11 +204,11 @@ Report* partial_shell_sort(Array* array, int k) {
 static void partition(Array* array, int begin, int end, int k, Report* report){
     if(begin >= end) return;
     
-    int pivo = begin;
-    int j = begin + 1;
+    int pivo = begin; // Elemento pivô é o mais a esquerda.
+    int j = begin + 1; // Controla onde serão colocados os elementos maiores que o pivô.
 
-    for(int i = begin; i <= end; i++){
-        if(array->v[i] > array->v[pivo]){
+    for(int i = begin; i <= end; i++){ // Percorre toda a partição.
+        if(array->v[i] > array->v[pivo]){ // Se for maior que o pivô, faz o swap.
             swap(&array->v[j], &array->v[i]);
             increment_swap(report);
             j++;
@@ -214,13 +216,13 @@ static void partition(Array* array, int begin, int end, int k, Report* report){
         increment_comparation(report);
     }
 
-    swap(&array->v[pivo], &array->v[j - 1]);
+    swap(&array->v[pivo], &array->v[j - 1]); // Colocando o pivô em sua posição correta. 
     increment_swap(report);
     
     pivo = j - 1;
 
     partition(array, begin, pivo - 1, k, report);
-    if(pivo - begin < k){
+    if(pivo - begin < k){ // Só chama a partição a direita se a partição a esquerda tiver tamanho menor que k.
         partition(array, pivo + 1, end, k, report);    
     }
 }
@@ -242,11 +244,12 @@ Report* partial_quick_sort(Array* array, int k) {
 }
 
 static void max_heapify(Array* array, int size, int i, Report* report) {
-    // Find largest among root, left child and right child
-    int largest = i;  //i eh a posiçao do pai
+    // Definindo os índices do elemento pai e seus filhos.
+    int largest = i;
     int left = 2 * i + 1;
     int right = 2 * i + 2;
-      
+
+    // Os próximos 2 ifs descobrem o índice do maior elemento dentre o pai e os filhos. 
     if(left < size && array->v[left] > array->v[largest])
         largest = left;
     increment_comparation(report);
@@ -256,7 +259,8 @@ static void max_heapify(Array* array, int size, int i, Report* report) {
     increment_comparation(report);    
 
     increment_comparation(report);
-    if(largest != i){
+
+    if(largest != i){ // Se o índice do maior elemento não for o do pai, faz o swap e chama a função recursivamente.
         swap(&array->v[i], &array->v[largest]);
         increment_swap(report);
         max_heapify(array, size, largest, report);
@@ -269,9 +273,11 @@ Report* partial_heap_sort(Array* array, int k) {
     Report* r = create_report(k, "heapsort", array->length);
     clock_t start = clock();
     
+    // Constrói o heap. 
     for (int i = array->size / 2 - 1; i >= 0; i--) 
         max_heapify(array, array->size, i, r);
 
+    // Pega o maior elemento do heap, coloca no final do vetor e reconstrói o heap para os elementos restantes.
     for (int i = array->size - 1;  i >= array->size - k; i--) {
         swap(&array->v[0], &array->v[i]); 
         increment_swap(r); 
