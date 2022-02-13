@@ -61,7 +61,7 @@ void fill_array_topK(Report* report, Array* array, int is_heap){
 }
 
 void print_statistics(Report* report){
-    printf("Algoritmo: %s\n", report->algorithm);
+    // printf("Algoritmo: %s\n", report->algorithm);
     printf("Tempo de CPU: %.6f\n", report->time);
     printf("Comparações: %llu\n", report->comparation);
     printf("Trocas: %llu\n", report->swap);
