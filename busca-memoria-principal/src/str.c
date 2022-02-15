@@ -13,6 +13,14 @@ static int mystrlen(char *a) {
 String* create_string(char *a) {
     String *s = malloc(sizeof *s);
     s->len = mystrlen(a);
+
+    // printf("\n---------------------\n");
+    // // for (int i = 0; i < s->len; i++) {
+    // //     printf("%c", a[i]);
+    // // }
+    // printf("[%s]", a);
+    // printf("\n---------------------\n");
+
     s->c = malloc(s->len * sizeof(char));
     for (int i = 0; i < s->len; i++) {
         s->c[i] = a[i];

@@ -1,4 +1,4 @@
-TARGET := tp1
+TARGET := tp2
 LIBS := -lm
 CFLAGS := -g -O3 -Wno-unused-result
 #CFLAGS := -g -O3 
@@ -35,4 +35,4 @@ clean: # Remove pasta com os arquivos objeto e o executável.
 	-rm -f $(TARGET)
 
 run: # Executa o programa com valgrind com uma entrada específica.
-	valgrind ./tp1 -2e 10000 inputs/invertido/invertido/100000.txt
+	valgrind ./tp2 
