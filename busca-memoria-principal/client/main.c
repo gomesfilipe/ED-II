@@ -7,7 +7,8 @@
 int main(int argc, char** argv) { 
     //String* string = read_txt("input/abra.txt");
     
-    String* string = read_txt("input/teste.txt");
+    // String* string = read_txt("input/teste.txt");
+    String* string = read_txt("input/teste2.txt");
 
 
     printf("\n\n ------- main -------- \n\n");
@@ -16,19 +17,4 @@ int main(int argc, char** argv) {
     destroy_string(string);
 
     return 0;
-
 }
-
-// elaine
-// laine
-// aine
-// ine
-// ne
-// e
-
-//filipe
-//ilipe
-//lipe
-//ipe
-//pe
-//e

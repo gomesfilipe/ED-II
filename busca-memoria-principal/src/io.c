@@ -13,16 +13,23 @@ String* read_txt(char* fileName){
 
     int size;
     fscanf(f, "%d\n", &size);
-    //A menina que roubava livros
-    //  A menina que roubava livros
-    char str[size];
-    char aux;
-    int to_jump = FALSE;
+    
+    char* str = (char*) malloc(sizeof(char) * size);
 
-    for(int i = 0, j = 0; i < size; i++){
+    char aux;
+    int to_jump = FALSE, j = 0;
+
+    while(TRUE){
         fscanf(f, "%c", &aux);
         
-        // printf("[%c] ", aux);
+        if(feof(f)){
+            if(to_jump == TRUE){
+                j--;
+                str[j] = '\0';
+            }
+            
+            break;
+        } 
         
         if((aux == ' ' && to_jump == TRUE) || aux == '\n'){
             continue;
@@ -36,12 +43,12 @@ String* read_txt(char* fileName){
 
         str[j] = aux;
         
-        printf(".%c.", str[j]);
         j++;
         str[j] = '\0';
     }
 
     fclose(f);
     String* string = create_string(str);
+    free(str);
     return string;
 }
