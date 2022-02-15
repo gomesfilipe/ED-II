@@ -18,25 +18,40 @@ void destroy_suffix(Suffix *suf){
 }
 
 void print_suffix(Suffix *suf){
-    //print_substring(suf->index, suf->index, suf->s->len);
+    print_substring(suf->s, suf->index, get_len(suf->s));
 }
 
 Suffix** create_suf_array(String *text, int N){
+    Suffix** suf_array = (Suffix**) malloc(sizeof(Suffix*) * N);
 
+    for(int i = 0; i < N; i++){
+        suf_array[i] = create_suffix(text, i);
+    }
+
+    return suf_array;
 }
 
 void destroy_suf_array(Suffix* *a, int N){
-
+    for (int i = 0; i < N ; i++){
+        destroy_suffix(a->[i]);
+    }
+    free(a);
 }
 
 void print_suf_array(Suffix* *a, int N){
-
+    for (int i = 0; i < N ; i++){
+        print_suffix(a->[i]);
+    }
 }
 
-// Use uma (ou mais) funcoes deste tipo para ordenar
-// o arry de sufixos usando o qsort e outro metodo de sua escolha
-void sort_suf_array(Suffix* *a, int N){
+static int compare_suf(Suffix* a, Suffix* b){
+    String* A = a->s + a->index;
+    String* B = b->s + b->index;
+    return compare(A, B);
+}
 
+void sort_suf_array(Suffix* *a, int N){
+    qsort(a, N, sizeof(Suffix*), compare_suf);
 }
 
 int rank(Suffix* *a, int N, String *query){

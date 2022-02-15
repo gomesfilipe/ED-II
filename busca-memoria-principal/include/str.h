@@ -3,12 +3,13 @@
 
 #include <stdbool.h>
 
-// Novo tipo de strings para evitar o inferno astral de ter de lidar com
-// array de char terminado por '\0'.
-typedef struct {
-    char *c;
-    int len;
-} String;
+typedef struct string String;
+
+// Retorna o ponteiro para o vetor de caracteres de uma String.
+char* get_c(String* str);
+
+// Retorna o tamanho de uma string.
+int get_len(String* str);
 
 // Cria uma estrutura String a partir de uma string do C (terminada por '\0').
 String* create_string(char *cs);
