@@ -14,7 +14,7 @@ String* read_txt(char* fileName){
     int size;
     fscanf(f, "%d\n", &size);
     
-    char* str = (char*) malloc(sizeof(char) * size);
+    char* str = (char*) malloc(sizeof(char) * (size + 1));
 
     char aux;
     int to_jump = FALSE, j = 0;

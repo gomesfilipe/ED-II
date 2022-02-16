@@ -13,7 +13,7 @@ Suffix* create_suffix(String *s, int index){
 }
 
 void destroy_suffix(Suffix *suf){
-    destroy_string(suf->s);
+    //destroy_string(suf->s);
     free(suf);
 }
 
@@ -33,25 +33,45 @@ Suffix** create_suf_array(String *text, int N){
 
 void destroy_suf_array(Suffix* *a, int N){
     for (int i = 0; i < N ; i++){
-        destroy_suffix(a->[i]);
+        destroy_suffix(a[i]);
     }
     free(a);
 }
 
-void print_suf_array(Suffix* *a, int N){
+void print_suf_array(Suffix** a, int N){
     for (int i = 0; i < N ; i++){
-        print_suffix(a->[i]);
+        print_suffix(a[i]);
+        printf("\n");
     }
 }
 
-static int compare_suf(Suffix* a, Suffix* b){
-    String* A = a->s + a->index;
-    String* B = b->s + b->index;
+// static int compare_suf(Suffix* a, Suffix* b){
+//     // String* A = a->s + a->index;
+//     // String* B = b->s + b->index;
+
+//     String* A = create_string((char*) a->s + a->index);
+//     String* B = create_string((char*) b->s + b->index);
+//     return compare(A, B);
+// }
+
+static int compare_suf(void* a, void* b){
+    // String* A = a->s + a->index;
+    // String* B = b->s + b->index;
+
+    Suffix* sufA = (Suffix*) a;
+    Suffix* sufB = (Suffix*) b;
+
+    String* A = create_string(get_c(sufA->s) + sufA->index);
+    String* B = create_string(get_c(sufB->s) + sufB->index);
     return compare(A, B);
 }
 
-void sort_suf_array(Suffix* *a, int N){
-    qsort(a, N, sizeof(Suffix*), compare_suf);
+// void sort_suf_array(Suffix** a, int N){
+//     qsort(a, N, sizeof(Suffix*), compare_suf);
+// }
+
+void heap_sort_suf_array(Suffix** a, int N){
+    
 }
 
 int rank(Suffix* *a, int N, String *query){

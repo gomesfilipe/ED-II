@@ -23,6 +23,8 @@ void print_suf_array(Suffix* *a, int N);
 // o arry de sufixos usando o qsort e outro metodo de sua escolha
 void sort_suf_array(Suffix* *a, int N);
 
+void heap_sort_suf_array(Suffix* *a, int N);
+
 int rank(Suffix* *a, int N, String *query);
 
 #endif
