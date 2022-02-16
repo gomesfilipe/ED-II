@@ -1,5 +1,3 @@
-#include <stdio.h>
-#include <stdlib.h>
 #include "str.h"
 
 // Novo tipo de strings para evitar o inferno astral de ter de lidar com

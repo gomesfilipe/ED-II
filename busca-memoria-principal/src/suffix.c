@@ -54,7 +54,7 @@ void print_suf_array(Suffix** a, int N){
 //     return compare(A, B);
 // }
 
-static int compare_suf(void* a, void* b){
+static int compare_suf(const void* a, const void* b){
     // String* A = a->s + a->index;
     // String* B = b->s + b->index;
 
@@ -66,9 +66,9 @@ static int compare_suf(void* a, void* b){
     return compare(A, B);
 }
 
-// void sort_suf_array(Suffix** a, int N){
-//     qsort(a, N, sizeof(Suffix*), compare_suf);
-// }
+void sort_suf_array(Suffix** a, int N){
+    qsort(a, N, sizeof(Suffix*), compare_suf);
+}
 
 void heap_sort_suf_array(Suffix** a, int N){
     

@@ -3,6 +3,7 @@
 #define FALSE 0
 #define TRUE 1
 
+
 String* read_txt(char* fileName){
     FILE *f = fopen(fileName, "r");
 
@@ -51,4 +52,17 @@ String* read_txt(char* fileName){
     String* string = create_string(str);
     free(str);
     return string;
+}
+
+void split(char** argv, int* control_keys, char* fileName, int* context, char* query){
+    for(int i = 1; i < strlen(argv[1]); i++){
+        int key = argv[1][i];
+        control_keys[key] = TRUE;
+    }
+
+    strcpy(fileName, argv[2]);
+
+    *context = atoi(argv[3]);
+
+    strcpy(query, argv[4]);
 }

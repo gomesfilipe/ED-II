@@ -1,6 +1,8 @@
 #ifndef STR_H
 #define STR_H
 
+#include <stdio.h>
+#include <stdlib.h>
 #include <stdbool.h>
 
 typedef struct string String;
