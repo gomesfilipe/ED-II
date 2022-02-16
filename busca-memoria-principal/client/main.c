@@ -25,15 +25,18 @@ int main(int argc, char** argv) {
     // String* string = read_txt("input/teste2.txt");
 
 
-    printf("\n\n ------- main -------- \n\n");
-    print_string(string);
-    printf("\n\n");
+    //printf("\n\n ------- main -------- \n\n");
+    //print_string(string);
+    //printf("\n\n");
     
+    //printf("len [%d]\n", get_len(string));
+
     Suffix** array = create_suf_array(string, get_len(string));
     print_suf_array(array, get_len(string));
 
     printf("\n\n------------------\n\n");
-    sort_suf_array(array, get_len(string));
+    // sort_suf_array(array, get_len(string));
+    heap_sort_suf_array(array, get_len(string));
     print_suf_array(array, get_len(string));
 
 

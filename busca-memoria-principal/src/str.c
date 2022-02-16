@@ -20,14 +20,17 @@ static int mystrlen(char *a) {
     for (i = 0; a[i] != '\0'; i++);
     return i;
 }
-
+// f i l i p e \0    7
+//f i l i p e     6
 String* create_string(char *a) {
-    String *s = malloc(sizeof *s);
-    s->len = mystrlen(a);
-    s->c = malloc(s->len * sizeof(char));
+    // String *s = malloc(sizeof *s);
+    String *s = (String*) malloc(sizeof(String));
+    s->len = mystrlen(a); //6
+    s->c = malloc((s->len + 1) * sizeof(char)); //estavamos mallocando sem espaço pro \0
     for (int i = 0; i < s->len; i++) {
         s->c[i] = a[i];
     }
+    s->c[s->len] = '\0';
     return s;
 }
 

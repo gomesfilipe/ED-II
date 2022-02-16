@@ -22,7 +22,6 @@ String* read_txt(char* fileName){
 
     while(TRUE){
         fscanf(f, "%c", &aux);
-        
         if(feof(f)){
             if(to_jump == TRUE){
                 j--;
@@ -43,14 +42,13 @@ String* read_txt(char* fileName){
         }
 
         str[j] = aux;
-        
         j++;
         str[j] = '\0';
     }
 
-    fclose(f);
     String* string = create_string(str);
     free(str);
+    fclose(f);
     return string;
 }
 
