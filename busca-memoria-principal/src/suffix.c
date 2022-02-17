@@ -5,21 +5,36 @@ struct suffix {
     int index;
 };
 
+// Suffix* create_suffix(String *s, int index){
+//     Suffix* suffix = (Suffix*) malloc(sizeof(Suffix));
+//     suffix->s = create_string(get_c(s) + index);
+//     suffix->index = index;
+//     return suffix;
+// }
+
 Suffix* create_suffix(String *s, int index){
     Suffix* suffix = (Suffix*) malloc(sizeof(Suffix));
-    char* tam = get_c(s);
-    suffix->s = create_string(get_c(s) + index);
+    suffix->s = s;
     suffix->index = index;
     return suffix;
 }
 
+// void destroy_suffix(Suffix *suf){
+//     destroy_string(suf->s);
+//     free(suf); 
+// }
+
 void destroy_suffix(Suffix *suf){
-    destroy_string(suf->s);
     free(suf); 
 }
 
+// void print_suffix(Suffix *suf){
+//     print_substring(suf->s, 0, get_len(suf->s));
+//     //printf("  index [%d]", suf->index);
+// }
+
 void print_suffix(Suffix *suf){
-    print_substring(suf->s, 0, get_len(suf->s));
+    print_substring(suf->s, suf->index, get_len(suf->s));
     //printf("  index [%d]", suf->index);
 }
 
@@ -47,11 +62,49 @@ void print_suf_array(Suffix** a, int N){
     }
 }
 
+// static int compare_suf(const void* a, const void* b){
+//     Suffix* sufA = *(Suffix**) a;
+//     Suffix* sufB = *(Suffix**) b;
+//     return compare(sufA->s, sufB->s);
+// }
+
+static int len_suf(Suffix* suf){
+    return get_len(suf->s) - suf->index;
+}
+
 static int compare_suf(const void* a, const void* b){
     Suffix* sufA = *(Suffix**) a;
     Suffix* sufB = *(Suffix**) b;
-    return compare(sufA->s, sufB->s);
+    
+    int lenA = len_suf(sufA);
+    int lenB = len_suf(sufB);
+
+    char* A = get_c(sufA->s) + sufA->index;
+    char* B = get_c(sufB->s) + sufB->index;
+
+    // printf("[%s]\n", A);
+    // printf("[%s]\n", B);
+
+    // exit(1);
+    // int rangeA = get_len(sufA->s);
+    // int rangeB = get_len(sufB->s);
+
+    int min = lenA < lenB ? lenA : lenB;
+    for(int i = 0; i < min; i++){
+        if(A[i] < B[i]) return -1;
+        if(A[i] > B[i]) return 1;
+    }  
+    return lenA - lenB; 
 }
+
+// int compare_from(String *s, String *t, int d) {
+//     int min = s->len < t->len ? s->len : t->len;
+//     for (int i = d; i < min; i++) {
+//         if (s->c[i] < t->c[i]) { return -1; }
+//         if (s->c[i] > t->c[i]) { return  1; }
+//     }
+//     return s->len - t->len;
+// }
 
 void sort_suf_array(Suffix** a, int N){    
     qsort(a, N, sizeof(Suffix*), compare_suf);
@@ -74,13 +127,13 @@ static void max_heapify(Suffix** array, int size, int i) {
     // if(left < size && array->v[left] < array->v[largest])
     //     largest = left;
     
-    if(left < size && compare_suf(&array[left], &array[largest]) == 1)
+    if(left < size && compare_suf(&array[left], &array[largest]) > 0)
         largest = left;
     
     // if(right < size && array->v[right] < array->v[largest])
     //     largest = right;
 
-    if(right < size && compare_suf(&array[right], &array[largest]) == 1)
+    if(right < size && compare_suf(&array[right], &array[largest]) > 0)
         largest = right; 
 
     if(largest != i){ // Se o índice do maior elemento não for o do pai, faz o swap e chama a função recursivamente.
