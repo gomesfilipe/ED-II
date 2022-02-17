@@ -64,7 +64,7 @@ static void swap(Suffix** a, Suffix** b){
     *b = aux;
 }
 
-static void min_heapify(Suffix** array, int size, int i) {
+static void max_heapify(Suffix** array, int size, int i) {
     // Definindo os índices do elemento pai e seus filhos.
     int largest = i;
     int left = 2 * i + 1;
@@ -74,30 +74,30 @@ static void min_heapify(Suffix** array, int size, int i) {
     // if(left < size && array->v[left] < array->v[largest])
     //     largest = left;
     
-    if(left < size && compare_suf(array[left], array[largest]) == -1)
+    if(left < size && compare_suf(&array[left], &array[largest]) == 1)
         largest = left;
     
     // if(right < size && array->v[right] < array->v[largest])
     //     largest = right;
 
-    if(right < size && compare_suf(array[right], array[largest]) == -1)
+    if(right < size && compare_suf(&array[right], &array[largest]) == 1)
         largest = right; 
 
     if(largest != i){ // Se o índice do maior elemento não for o do pai, faz o swap e chama a função recursivamente.
         swap(&array[i], &array[largest]);
-        min_heapify(array, size, largest);
+        max_heapify(array, size, largest);
     }
 }
 
 void heap_sort_suf_array(Suffix** array, int N){
     // Constrói o heap. 
     for (int i = N / 2 - 1; i >= 0; i--) 
-        min_heapify(array, N, i);
+        max_heapify(array, N, i);
 
     // Pega o maior elemento do heap, coloca no final do vetor e reconstrói o heap para os elementos restantes.
     for (int i = N - 1;  i >= 0; i--) {
         swap(&array[0], &array[i]); 
-        min_heapify(array, i, 0);
+        max_heapify(array, i, 0);
     } 
 }
 
