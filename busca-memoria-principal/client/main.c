@@ -31,7 +31,7 @@ int main(int argc, char** argv) {
     // heap_sort_suf_array(array, get_len(string));
     //print_suf_array(array, get_len(string));
 
-    String* query = create_string("majesty");
+    String* query = create_string("the WOrST");
 
     int position = search_first_query(array, get_len(string), query);
 
@@ -43,3 +43,9 @@ int main(int argc, char** argv) {
 
     return 0;
 }
+
+// TODO
+// Fazer argc, argv.
+// Relatório.
+// Comentar código.
+// Retirar comentários em excesso.

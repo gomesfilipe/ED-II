@@ -1,7 +1,5 @@
 #include "str.h"
 
-// Novo tipo de strings para evitar o inferno astral de ter de lidar com
-// array de char terminado por '\0'.
 struct string {
     char *c;
     int len;
@@ -20,18 +18,17 @@ static int mystrlen(char *a) {
     for (i = 0; a[i] != '\0'; i++);
     return i;
 }
-// f i l i p e \0    7
-//f i l i p e     6
+
 String* create_string(char *a) {
     // String *s = malloc(sizeof *s);
     String *s = (String*) malloc(sizeof(String));
     s->len = mystrlen(a); //6
-    // s->c = malloc((s->len + 1) * sizeof(char)); //estavamos mallocando sem espaço pro \0
-    s->c = malloc((s->len) * sizeof(char)); //estavamos mallocando sem espaço pro \0
+    s->c = malloc((s->len + 1) * sizeof(char)); //estavamos mallocando sem espaço pro \0
+    // s->c = malloc((s->len) * sizeof(char)); //estavamos mallocando sem espaço pro \0
     for (int i = 0; i < s->len; i++) {
         s->c[i] = a[i];
     }
-    // s->c[s->len] = '\0';
+    s->c[s->len] = '\0';
     return s;
 }
 
@@ -81,7 +78,7 @@ void print_str_array(String* *a, int N) {
 bool equals_substring(String *text, int from, int to, String *query) {
     //if (query->len < (to - from + 1)) { return false; }
     for (int i = 0; i < query->len; i++) {
-        if(query->c[i] != text->c[from + i]) { return false; }
+        if(tolower(query->c[i]) != tolower(text->c[from + i])) { return false; }
     }
     return true;
 }

@@ -108,32 +108,62 @@ void heap_sort_suf_array(Suffix** array, int N){
     } 
 }
 
-static int partition(Suffix** a, String* query, int begin, int end){
+static int partition(Suffix** a, Suffix* query, int begin, int end){
     if(begin > end) return -1;
     
     int pivo = (begin + end) / 2;
-
+    // printf("begin [%d] | end [%d] | pivo [%d] | ", begin, end, pivo);
     // printf("begin [%d]\nend [%d]\n", begin, end);
 
     String* string = a[pivo]->s;
     //String *text, int from, int to, String *quer
-    if(equals_substring(string, a[pivo]->index, get_len(string), query)){
-        return pivo;
-    }
-
-    int position = partition(a, query, begin, pivo - 1);
-    if(position >= 0) return position;
     
-    position = partition(a, query, pivo + 1, end);
-    if(position >= 0) return position;
-    else return -1;
+    // if(pivo == 650208){
+    //     printf("query: ");
+    //     print_suffix(query);
+    //     printf("\npivo: ");
+    //     print_suffix(a[pivo]);
+    //     printf("\n");
+    // }
+
+    // if(equals_substring(string, a[pivo]->index, get_len(string), query->s)){
+    //     // printf("encontrou\n");
+    //     return pivo;
+    // }
+
+    if(equals_substring(string, a[pivo]->index, get_len(string), query->s)){
+        return pivo;
+    
+    } else{
+        // printf("compare %d\n", compare_suf(query, a[pivo]));
+        if(compare_suf(&query, &a[pivo]) < 0){
+            // printf("esquerda\n");
+            return partition(a, query, begin, pivo - 1);
+        
+        } else if (compare_suf(&query, &a[pivo]) > 0){
+            // printf("direita\n");
+            return partition(a, query, pivo + 1, end);
+        }
+    }
+    
+    // int position = partition(a, query, begin, pivo - 1);
+    // if(position >= 0) return position;
+    
+    // position = partition(a, query, pivo + 1, end);
+    // if(position >= 0) return position;
+    // else return -1;
     // return partition(a, N, query, begin, pivo - 1) || partition(a, N, query, pivo + 1, end);
 }
 
 
 //O valor index no sufixo indica a posição em que o termo se encontra no texto.
 int binary_search(Suffix** a, int N, String* query){
-    return partition(a, query, 0, N);
+    printf("TAMANHO VETOR [%d]\n\n", N);
+    Suffix* suf_query = create_suffix(query, 0);
+    
+    int position = partition(a, suf_query, 0, N - 1);
+    destroy_suffix(suf_query);
+    return position;
 }
 
 int search_first_query(Suffix** a, int N, String* query){
@@ -144,8 +174,8 @@ int search_first_query(Suffix** a, int N, String* query){
         String* s = a[i]->s;
         if( ! equals_substring(s, a[i]->index , get_len(s) , query ) ) break;
     }
-    i++;
-    return i; //corrigindo a posição
+    i++;  //corrigindo a posição
+    return i; 
 }
 
 void print_binary_search(Suffix** a, int N, int first, int context, String* query){
@@ -166,15 +196,7 @@ void print_binary_search(Suffix** a, int N, int first, int context, String* quer
 }
 
 int rank(Suffix* *a, int N, String *query){
+    // int first = search_first_query(a, N, query);
 
+    // print_binary_search(a, N, first);
 }
-
-/*
-Dada uma string de consulta query, realize a busca no array de sufixos. 
-Note que como agora o array está ordenado, você pode fazer uma busca binária no array, 
-procurando a primeira posição em que query aparece no começo do sufixo, 
-e varrendo todas as posições do array sequencialmente até query não aparecer mais.
- O valor index no sufixo indica a posição em que o termo se encontra no texto. 
-Assim, basta exibir os caracteres no intervalo (index - context, index + size_query + context). 
-A figura abaixo ilustra como fazer a busca
-*/

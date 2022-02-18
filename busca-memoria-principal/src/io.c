@@ -3,7 +3,6 @@
 #define FALSE 0
 #define TRUE 1
 
-
 String* read_txt(char* fileName){
     FILE *f = fopen(fileName, "r");
 

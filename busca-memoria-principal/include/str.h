@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <ctype.h>
 
 typedef struct string String;
 
@@ -40,8 +41,10 @@ void destroy_str_array(String* *a, int N);
 // Exibe o vetor de Strings em stdout.
 void print_str_array(String* *a, int N);
 
+// Verifica se a query é igual a substring de text que está no invervalo from até to.
 bool equals_substring(String *text, int from, int to, String *query);
 
+// Imprime uma substring num dado intervalo dos índices from até to.
 void print_substring(String *text, int from, int to);
 
 #endif
