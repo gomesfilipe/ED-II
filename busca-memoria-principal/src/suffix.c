@@ -5,13 +5,6 @@ struct suffix {
     int index;
 };
 
-// Suffix* create_suffix(String *s, int index){
-//     Suffix* suffix = (Suffix*) malloc(sizeof(Suffix));
-//     suffix->s = create_string(get_c(s) + index);
-//     suffix->index = index;
-//     return suffix;
-// }
-
 Suffix* create_suffix(String *s, int index){
     Suffix* suffix = (Suffix*) malloc(sizeof(Suffix));
     suffix->s = s;
@@ -19,19 +12,9 @@ Suffix* create_suffix(String *s, int index){
     return suffix;
 }
 
-// void destroy_suffix(Suffix *suf){
-//     destroy_string(suf->s);
-//     free(suf); 
-// }
-
 void destroy_suffix(Suffix *suf){
     free(suf); 
 }
-
-// void print_suffix(Suffix *suf){
-//     print_substring(suf->s, 0, get_len(suf->s));
-//     //printf("  index [%d]", suf->index);
-// }
 
 void print_suffix(Suffix *suf){
     print_substring(suf->s, suf->index, get_len(suf->s));
@@ -62,12 +45,6 @@ void print_suf_array(Suffix** a, int N){
     }
 }
 
-// static int compare_suf(const void* a, const void* b){
-//     Suffix* sufA = *(Suffix**) a;
-//     Suffix* sufB = *(Suffix**) b;
-//     return compare(sufA->s, sufB->s);
-// }
-
 static int len_suf(Suffix* suf){
     return get_len(suf->s) - suf->index;
 }
@@ -82,34 +59,17 @@ static int compare_suf(const void* a, const void* b){
     char* A = get_c(sufA->s) + sufA->index;
     char* B = get_c(sufB->s) + sufB->index;
 
-    // printf("[%s]\n", A);
-    // printf("[%s]\n", B);
-
-    // exit(1);
-    // int rangeA = get_len(sufA->s);
-    // int rangeB = get_len(sufB->s);
-
     int min = lenA < lenB ? lenA : lenB;
     for(int i = 0; i < min; i++){
-        if(A[i] < B[i]) return -1;
-        if(A[i] > B[i]) return 1;
+        if(tolower(A[i]) < tolower(B[i])) return -1;  
+        if(tolower(A[i]) > tolower(B[i])) return 1;
     }  
     return lenA - lenB; 
 }
 
-// int compare_from(String *s, String *t, int d) {
-//     int min = s->len < t->len ? s->len : t->len;
-//     for (int i = d; i < min; i++) {
-//         if (s->c[i] < t->c[i]) { return -1; }
-//         if (s->c[i] > t->c[i]) { return  1; }
-//     }
-//     return s->len - t->len;
-// }
-
 void sort_suf_array(Suffix** a, int N){    
     qsort(a, N, sizeof(Suffix*), compare_suf);
 }
-
 
 static void swap(Suffix** a, Suffix** b){
     Suffix* aux = *a;
@@ -124,14 +84,8 @@ static void max_heapify(Suffix** array, int size, int i) {
     int right = 2 * i + 2;
 
     // Os próximos 2 ifs descobrem o índice do maior elemento dentre o pai e os filhos. 
-    // if(left < size && array->v[left] < array->v[largest])
-    //     largest = left;
-    
     if(left < size && compare_suf(&array[left], &array[largest]) > 0)
         largest = left;
-    
-    // if(right < size && array->v[right] < array->v[largest])
-    //     largest = right;
 
     if(right < size && compare_suf(&array[right], &array[largest]) > 0)
         largest = right; 
@@ -154,32 +108,73 @@ void heap_sort_suf_array(Suffix** array, int N){
     } 
 }
 
-// Report* partial_heap_sort(Array* array, int k) {   
-//     if(k > array->length) return NULL;
-
-//     Report* r = create_report(k, "heapsort", array->length);
-//     clock_t start = clock();
+static int partition(Suffix** a, String* query, int begin, int end){
+    if(begin > end) return -1;
     
-//     // Constrói o heap. 
-//     for (int i = array->size / 2 - 1; i >= 0; i--) 
-//         max_heapify(array, array->size, i, r);
+    int pivo = (begin + end) / 2;
 
-//     // Pega o maior elemento do heap, coloca no final do vetor e reconstrói o heap para os elementos restantes.
-//     for (int i = array->size - 1;  i >= array->size - k; i--) {
-//         swap(&array->v[0], &array->v[i]); 
-//         increment_swap(r); 
-//         max_heapify(array, i, 0, r);
-//     } 
+    // printf("begin [%d]\nend [%d]\n", begin, end);
+
+    String* string = a[pivo]->s;
+    //String *text, int from, int to, String *quer
+    if(equals_substring(string, a[pivo]->index, get_len(string), query)){
+        return pivo;
+    }
+
+    int position = partition(a, query, begin, pivo - 1);
+    if(position >= 0) return position;
     
-//     clock_t end = clock();
+    position = partition(a, query, pivo + 1, end);
+    if(position >= 0) return position;
+    else return -1;
+    // return partition(a, N, query, begin, pivo - 1) || partition(a, N, query, pivo + 1, end);
+}
 
-//     double time = ((double) (end - start)) / CLOCKS_PER_SEC;
-//     set_time(r, time);
-//     fill_array_topK(r, array, TRUE);
-//     return r;
-// }
 
+//O valor index no sufixo indica a posição em que o termo se encontra no texto.
+int binary_search(Suffix** a, int N, String* query){
+    return partition(a, query, 0, N);
+}
+
+int search_first_query(Suffix** a, int N, String* query){
+    int position = binary_search(a, N, query);
+
+    int i;
+    for(i = position - 1; i >= 0; i--){
+        String* s = a[i]->s;
+        if( ! equals_substring(s, a[i]->index , get_len(s) , query ) ) break;
+    }
+    i++;
+    return i; //corrigindo a posição
+}
+
+void print_binary_search(Suffix** a, int N, int first, int context, String* query){
+    for(int i = first; i < N && i >= 0; i++){
+        String* s = a[i]->s;
+        int len = get_len(s); 
+        int from = a[i]->index - context;
+        int to = a[i]->index + get_len(query) + context ; //+1;
+        // printf("from [%d]\nto[%d]\n", from, to);
+        if(from < 0) from = 0;
+        if(to > len) to = len - 1 + 1;
+       
+        if( ! equals_substring(s, a[i]->index , len , query)) break; 
+        // print_suffix(a[i]);
+        print_substring(s, from, to);
+        printf("\n");
+    }
+}
 
 int rank(Suffix* *a, int N, String *query){
 
 }
+
+/*
+Dada uma string de consulta query, realize a busca no array de sufixos. 
+Note que como agora o array está ordenado, você pode fazer uma busca binária no array, 
+procurando a primeira posição em que query aparece no começo do sufixo, 
+e varrendo todas as posições do array sequencialmente até query não aparecer mais.
+ O valor index no sufixo indica a posição em que o termo se encontra no texto. 
+Assim, basta exibir os caracteres no intervalo (index - context, index + size_query + context). 
+A figura abaixo ilustra como fazer a busca
+*/

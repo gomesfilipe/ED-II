@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "str.h"
+#include <ctype.h>
 
 typedef struct suffix Suffix;
 
@@ -27,5 +28,11 @@ void sort_suf_array(Suffix* *a, int N);
 void heap_sort_suf_array(Suffix* *a, int N);
 
 int rank(Suffix* *a, int N, String *query);
+
+int binary_search(Suffix** a, int N, String* query);
+
+void print_binary_search(Suffix** a, int N, int first, int context, String* query);
+
+int search_first_query(Suffix** a, int N, String* query);
 
 #endif

@@ -32,6 +32,15 @@ String* read_txt(char* fileName){
         } 
         
         if((aux == ' ' && to_jump == TRUE) || aux == '\n'){
+            if(aux == '\n'){
+                if(to_jump == FALSE){
+                    str[j] = ' ';
+                    j++;
+                    str[j] = '\0';
+                }
+                to_jump = TRUE;
+            }
+            
             continue;
         
         } else if(aux == ' ' && to_jump == FALSE){
