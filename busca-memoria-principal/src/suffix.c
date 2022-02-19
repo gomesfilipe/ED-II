@@ -18,7 +18,6 @@ void destroy_suffix(Suffix *suf){
 
 void print_suffix(Suffix *suf){
     print_substring(suf->s, suf->index, get_len(suf->s));
-    //printf("  index [%d]", suf->index);
 }
 
 Suffix** create_suf_array(String *text, int N){
@@ -112,55 +111,24 @@ static int partition(Suffix** a, Suffix* query, int begin, int end){
     if(begin > end) return -1;
     
     int pivo = (begin + end) / 2;
-    // printf("begin [%d] | end [%d] | pivo [%d] | ", begin, end, pivo);
-    // printf("begin [%d]\nend [%d]\n", begin, end);
 
     String* string = a[pivo]->s;
-    //String *text, int from, int to, String *quer
     
-    // if(pivo == 650208){
-    //     printf("query: ");
-    //     print_suffix(query);
-    //     printf("\npivo: ");
-    //     print_suffix(a[pivo]);
-    //     printf("\n");
-    // }
-
-    // if(equals_substring(string, a[pivo]->index, get_len(string), query->s)){
-    //     // printf("encontrou\n");
-    //     return pivo;
-    // }
-
     if(equals_substring(string, a[pivo]->index, get_len(string), query->s)){
         return pivo;
     
     } else{
-        // printf("compare %d\n", compare_suf(query, a[pivo]));
         if(compare_suf(&query, &a[pivo]) < 0){
-            // printf("esquerda\n");
             return partition(a, query, begin, pivo - 1);
         
         } else if (compare_suf(&query, &a[pivo]) > 0){
-            // printf("direita\n");
             return partition(a, query, pivo + 1, end);
         }
     }
-    
-    // int position = partition(a, query, begin, pivo - 1);
-    // if(position >= 0) return position;
-    
-    // position = partition(a, query, pivo + 1, end);
-    // if(position >= 0) return position;
-    // else return -1;
-    // return partition(a, N, query, begin, pivo - 1) || partition(a, N, query, pivo + 1, end);
 }
 
-
-//O valor index no sufixo indica a posição em que o termo se encontra no texto.
 int binary_search(Suffix** a, int N, String* query){
-    printf("TAMANHO VETOR [%d]\n\n", N);
-    Suffix* suf_query = create_suffix(query, 0);
-    
+    Suffix* suf_query = create_suffix(query, 0);  
     int position = partition(a, suf_query, 0, N - 1);
     destroy_suffix(suf_query);
     return position;
@@ -168,13 +136,14 @@ int binary_search(Suffix** a, int N, String* query){
 
 int search_first_query(Suffix** a, int N, String* query){
     int position = binary_search(a, N, query);
-
     int i;
+    
     for(i = position - 1; i >= 0; i--){
         String* s = a[i]->s;
-        if( ! equals_substring(s, a[i]->index , get_len(s) , query ) ) break;
+        if(!equals_substring(s, a[i]->index , get_len(s) , query)) break;
     }
-    i++;  //corrigindo a posição
+
+    i++; // Corrigindo posição.
     return i; 
 }
 
@@ -183,20 +152,18 @@ void print_binary_search(Suffix** a, int N, int first, int context, String* quer
         String* s = a[i]->s;
         int len = get_len(s); 
         int from = a[i]->index - context;
-        int to = a[i]->index + get_len(query) + context ; //+1;
-        // printf("from [%d]\nto[%d]\n", from, to);
+        int to = a[i]->index + get_len(query) + context;
+
         if(from < 0) from = 0;
-        if(to > len) to = len - 1 + 1;
+        if(to > len) to = len;
        
         if( ! equals_substring(s, a[i]->index , len , query)) break; 
-        // print_suffix(a[i]);
+
         print_substring(s, from, to);
         printf("\n");
     }
 }
 
 int rank(Suffix* *a, int N, String *query){
-    // int first = search_first_query(a, N, query);
 
-    // print_binary_search(a, N, first);
 }
