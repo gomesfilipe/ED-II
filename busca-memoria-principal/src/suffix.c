@@ -13,7 +13,7 @@ Suffix* create_suffix(String *s, int index){
 }
 
 void destroy_suffix(Suffix *suf){
-    free(suf); 
+    free(suf); // Não libera a string pois todos os sufixos terão a mesma referência de string.
 }
 
 void print_suffix(Suffix *suf){
@@ -55,12 +55,12 @@ static int compare_suf(const void* a, const void* b){
     int lenA = len_suf(sufA);
     int lenB = len_suf(sufB);
 
-    char* A = get_c(sufA->s) + sufA->index;
-    char* B = get_c(sufB->s) + sufB->index;
+    char* A = get_c(sufA->s) + sufA->index; // Ajustando ponteiro para o início do sufixo A.
+    char* B = get_c(sufB->s) + sufB->index; // Ajustando ponteiro para o início do sufixo B.
 
     int min = lenA < lenB ? lenA : lenB;
     for(int i = 0; i < min; i++){
-        if(tolower(A[i]) < tolower(B[i])) return -1;  
+        if(tolower(A[i]) < tolower(B[i])) return -1; // tolower() faz que letras maiúsculas e minúsculas sejam tratadas igualmente.
         if(tolower(A[i]) > tolower(B[i])) return 1;
     }  
     return lenA - lenB; 
@@ -114,21 +114,21 @@ static int partition(Suffix** a, Suffix* query, int begin, int end){
 
     String* string = a[pivo]->s;
     
-    if(equals_substring(string, a[pivo]->index, get_len(string), query->s)){
+    if(equals_substring(string, a[pivo]->index, get_len(string), query->s)){ // Encontrou, retornar o index do elemento.
         return pivo;
     
     } else{
-        if(compare_suf(&query, &a[pivo]) < 0){
+        if(compare_suf(&query, &a[pivo]) < 0){ // Query é alfabeticamente menor? Buscar query na partição esquerda.
             return partition(a, query, begin, pivo - 1);
         
-        } else if (compare_suf(&query, &a[pivo]) > 0){
+        } else if (compare_suf(&query, &a[pivo]) > 0){ // Query é alfabeticamente maior? Buscar query na partição esquerda.
             return partition(a, query, pivo + 1, end);
         }
     }
 }
 
 int binary_search(Suffix** a, int N, String* query){
-    Suffix* suf_query = create_suffix(query, 0);  
+    Suffix* suf_query = create_suffix(query, 0); // Criamos um sufixo a partir da String para facilitar a comparação entre query e os sufixos na busca.
     int position = partition(a, suf_query, 0, N - 1);
     destroy_suffix(suf_query);
     return position;
@@ -140,7 +140,7 @@ int search_first_query(Suffix** a, int N, String* query){
     
     for(i = position - 1; i >= 0; i--){
         String* s = a[i]->s;
-        if(!equals_substring(s, a[i]->index , get_len(s) , query)) break;
+        if(!equals_substring(s, a[i]->index , get_len(s) , query)) break; // Encontrou a primeira posição diferente, encerrar o laço.
     }
 
     i++; // Corrigindo posição.
@@ -154,10 +154,10 @@ void print_binary_search(Suffix** a, int N, int first, int context, String* quer
         int from = a[i]->index - context;
         int to = a[i]->index + get_len(query) + context;
 
-        if(from < 0) from = 0;
+        if(from < 0) from = 0; // Ajustando extremos do intervalo para não ultrapassar os limites da string.
         if(to > len) to = len;
        
-        if( ! equals_substring(s, a[i]->index , len , query)) break; 
+        if(!equals_substring(s, a[i]->index , len , query)) break; // Encontrou elemento diferente de query, encerrar laço.
 
         print_substring(s, from, to);
         printf("\n");

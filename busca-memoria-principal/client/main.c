@@ -11,5 +11,4 @@ int main(int argc, char** argv) {
 
 // TODO
 // Relatório.
-// Comentar código.
-// Tirar \0 da create_string e testar novamente.
+// Ver para que serve a função rank(). Provavelmente iremos removê-la.

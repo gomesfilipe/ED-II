@@ -15,7 +15,7 @@ String* read_txt(char* fileName){
     int size;
     fscanf(f, "%d\n", &size);
     
-    char* str = (char*) malloc(sizeof(char) * (size + 1));
+    char* str = (char*) malloc(sizeof(char) * (size + 1)); // 1 espaço a mais por causa do \0.
 
     char aux;
     int to_jump = FALSE, j = 0;
@@ -23,16 +23,16 @@ String* read_txt(char* fileName){
     while(TRUE){
         fscanf(f, "%c", &aux);
         if(feof(f)){
-            if(to_jump == TRUE){
+            if(to_jump == TRUE){ // Verificando se o último caractere é um espaço.
                 j--;
-                str[j] = '\0';
+                str[j] = '\0'; // Se for, coloca um \0 onde ele estava.
             }
             
             break;
         } 
         
         if((aux == ' ' && to_jump == TRUE) || aux == '\n'){
-            if(aux == '\n'){
+            if(aux == '\n'){ // Colocar um espaço na string quando houver quebra de linha.
                 if(to_jump == FALSE){
                     str[j] = ' ';
                     j++;
@@ -43,16 +43,16 @@ String* read_txt(char* fileName){
             
             continue;
         
-        } else if(aux == ' ' && to_jump == FALSE){
+        } else if(aux == ' ' && to_jump == FALSE){ // Encontrou espaço pela primeira vez, atualizar variável de controle.
             to_jump = TRUE;
         
-        } else{
+        } else{ // Resetar variável de controle caso não seja espaço.
             to_jump = FALSE;
         }
 
         str[j] = aux;
         j++;
-        str[j] = '\0';
+        str[j] = '\0'; // Controlando posição do \0 para evitar problemas na criação da string.
     }
 
     String* string = create_string(str);
@@ -62,7 +62,10 @@ String* read_txt(char* fileName){
 }
 
 static void concat_str(int argc, char** argv, char* query){
-    for(int i = 4; i < argc; i++){
+    // Auxiliar de command_c. Caso a query tenha espaços, ela estará separada
+    // em várias strings no argv. O laço abaixo pega todas elas e as concatena 
+    // numa única string.
+    for(int i = 4; i < argc; i++){ 
         strcat(query, argv[i]);
         if(i != argc-1 ) {
             strcat(query, " ");
@@ -127,8 +130,8 @@ static void command_r(int argc, char** argv){
     clock_t end2 = clock();
     double cpu_time_used2 = ((double) (end2 - start2)) / CLOCKS_PER_SEC;
     
-    printf("Tempo do Quicksort: %f s\n", cpu_time_used1);
-    printf("Tempo do Heapsort:  %f s\n", cpu_time_used2);
+    printf("System qsort    %.3f (s)\n", cpu_time_used1);
+    printf("My_sort_heapsort    %.3f (s)\n", cpu_time_used2);
     
     destroy_suf_array(array_suf1, len);
     destroy_suf_array(array_suf2, len);

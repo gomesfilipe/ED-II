@@ -20,15 +20,13 @@ static int mystrlen(char *a) {
 }
 
 String* create_string(char *a) {
-    // String *s = malloc(sizeof *s);
     String *s = (String*) malloc(sizeof(String));
-    s->len = mystrlen(a); //6
-    s->c = malloc((s->len + 1) * sizeof(char)); //estavamos mallocando sem espaço pro \0
-    // s->c = malloc((s->len) * sizeof(char)); //estavamos mallocando sem espaço pro \0
+    s->len = mystrlen(a);
+    s->c = malloc((s->len + 1) * sizeof(char)); // Alteramos para alocar 1 espaço a mais para o \0.
     for (int i = 0; i < s->len; i++) {
         s->c[i] = a[i];
     }
-    s->c[s->len] = '\0';
+    s->c[s->len] = '\0'; // Colocando \0 na última posição.
     return s;
 }
 
