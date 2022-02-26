@@ -16,7 +16,6 @@ String* read_txt(char* fileName){
     fscanf(f, "%d\n", &size);
     
     char* str = (char*) malloc(sizeof(char) * (size + 1)); // 1 espaço a mais por causa do \0.
-
     char aux;
     int to_jump = FALSE, j = 0;
 

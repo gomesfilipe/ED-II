@@ -35,4 +35,4 @@ clean: # Remove pasta com os arquivos objeto e o executável.
 	-rm -f $(TARGET)
 
 run: # Executa o programa com valgrind com uma entrada específica.
-	valgrind ./tp2 -r input/tale.txt
+	valgrind ./tp2 -r input/lorem_ipsum1.txt
