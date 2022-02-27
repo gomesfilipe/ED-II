@@ -67,15 +67,6 @@ void sort_suf_array(Suffix* *a, int N);
 void heap_sort_suf_array(Suffix* *a, int N);
 
 /**
- * @brief 
- * @param a 
- * @param N 
- * @param query 
- * @return 
- */
-int rank(Suffix* *a, int N, String *query);
-
-/**
  * @brief Faz uma busca binária num vetor de sufixos ordenado de modo crescente.
  * @param a Vetor de sufixos que será realizada a busca.
  * @param N Tamanho do vetor.
@@ -93,7 +84,7 @@ int binary_search(Suffix** a, int N, String* query);
  * @param query Chave da busca.
  * @return Índice da primeira ocorrência do elemento encontrado que corresponde a chave.
  */
-int search_first_query(Suffix** a, int N, String* query);
+int rank(Suffix** a, int N, String* query);
 
 /**
  * @brief Imprime as string do arquivo de entrada que contém a string a query, até uma quantidade

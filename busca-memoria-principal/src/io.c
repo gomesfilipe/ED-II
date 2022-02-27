@@ -154,7 +154,7 @@ static void command_c(int argc, char** argv){
     String* query = create_string(query_aux);
    
     sort_suf_array(array_suf,len);
-    int first = search_first_query(array_suf, len, query);    
+    int first = rank(array_suf, len, query);    
    
     print_binary_search(array_suf,  len, first, context, query);
     
@@ -182,7 +182,7 @@ static void command_s(int argc, char** argv){
     while( scanf("%[^\n]", query_str) != 0 ){
         getchar();
         String* query = create_string(query_str);
-        int first = search_first_query(array_suf, len, query);
+        int first = rank(array_suf, len, query);
 
         print_binary_search(array_suf, len, first, context, query);
         printf("\n");

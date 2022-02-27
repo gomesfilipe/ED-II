@@ -134,7 +134,7 @@ int binary_search(Suffix** a, int N, String* query){
     return position;
 }
 
-int search_first_query(Suffix** a, int N, String* query){
+int rank(Suffix** a, int N, String* query){
     int position = binary_search(a, N, query);
     int i;
     
@@ -162,8 +162,4 @@ void print_binary_search(Suffix** a, int N, int first, int context, String* quer
         print_substring(s, from, to);
         printf("\n");
     }
-}
-
-int rank(Suffix* *a, int N, String *query){
-
 }
