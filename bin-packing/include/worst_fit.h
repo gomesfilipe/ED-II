@@ -8,8 +8,18 @@
 #include "file.h"
 #include "file_array.h"
 
+/**
+ * @brief Executes the worst fit in the sequence of array elements.
+ * @param fileArray File array.
+ * @return Quantity of disks.
+ */
 int worst_fit_in_order(FileArray* fileArray);
 
+/**
+ * @brief Executes the worst fit with the file array sorted.
+ * @param fileArray File array.
+ * @return Quantity of disks.
+ */
 int worst_fit_descending(FileArray* fileArray);
 
 #endif
