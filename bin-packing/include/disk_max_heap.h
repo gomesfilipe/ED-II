@@ -15,8 +15,14 @@ void free_heap(Heap* heap);
 
 void print_heap(Heap* heap);
 
+int get_size_heap(Heap* heap);
+
+int get_length_heap(Heap* heap);
+
 void insert_disk_in_heap(Heap* heap, Disk* disk);
 
 Disk* remove_max_disk_in_heap(Heap* heap);
+
+Disk* get_first_disk_in_heap(Heap* heap);
 
 #endif

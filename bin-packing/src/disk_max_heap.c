@@ -29,6 +29,14 @@ void print_heap(Heap* heap) {
     printf("\n");
 }
 
+int get_size_heap(Heap* heap) {
+    return heap->size;
+}
+
+int get_length_heap(Heap* heap) {
+    return heap->length;
+}
+
 static void swap(Disk** a, Disk** b) {
     Disk* aux = *a;
     *a = *b;
@@ -94,4 +102,8 @@ Disk* remove_max_disk_in_heap(Heap* heap) {
     max_heapify(heap, 0);
 
     return removed;
+}
+
+Disk* get_first_disk_in_heap(Heap* heap) {
+    return heap->disks[0];
 }

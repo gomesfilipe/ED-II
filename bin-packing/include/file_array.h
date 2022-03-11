@@ -61,6 +61,13 @@ int get_size_array(FileArray* fileArray);
  */
 int get_length_array(FileArray* fileArray);
 
+/**
+ * @brief Get the file in a file array at a index.
+ * @param fileArray File Array.
+ * @param index Index file that will be got.
+ * @return Pointer to a file.
+ * @return NULL, if index is invalid. 
+ */
 File* get_file_at_index(FileArray* fileArray, int index);
 
 #endif

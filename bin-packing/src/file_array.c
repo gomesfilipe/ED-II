@@ -83,7 +83,7 @@ int get_length_array(FileArray* fileArray) {
 }
 
 File* get_file_at_index(FileArray* fileArray, int index) {
-    if(index >= fileArray->length) return NULL;
+    if(index < 0 || index >= fileArray->length) return NULL;
     
     return fileArray->files[index];
 }
