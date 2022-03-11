@@ -3,6 +3,7 @@
 #define DISK_CAPACITY 1000000
 #define SUCCESS 1
 #define FAIL 0
+
 struct disk {
     int capacity;
     int freeSpace;

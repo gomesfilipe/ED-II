@@ -47,4 +47,20 @@ FileArray* reader(char* fileName);
  */
 void sort_array(FileArray* fileArray);
 
+/**
+ * @brief Gets the file array's size.
+ * @param fileArray File array that his size will be got.
+ * @return File array's size.
+ */
+int get_size_array(FileArray* fileArray);
+
+/**
+ * @brief Gets the file array's length.
+ * @param fileArray File array that his length will be got.
+ * @return File array's length.
+ */
+int get_length_array(FileArray* fileArray);
+
+File* get_file_at_index(FileArray* fileArray, int index);
+
 #endif

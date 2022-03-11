@@ -26,7 +26,7 @@ void free_file(File* file);
 void print_file(File* file);
 
 /**
- * @brief Get the file's size.
+ * @brief Gets the file's size.
  * @param file File that his size will be got.
  * @return File's size.
  */

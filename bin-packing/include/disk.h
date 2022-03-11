@@ -27,14 +27,14 @@ void free_disk(Disk* disk);
 void print_disk(Disk* disk);
 
 /**
- * @brief Get the disk's capacity.
+ * @brief Gets the disk's capacity.
  * @param disk Disk that his capacity will be got.
  * @return Disk's capacity.
  */
 int get_capacity(Disk* disk);
 
 /**
- * @brief Get the disk's free space.
+ * @brief Gets the disk's free space.
  * @param disk Disk that his free space will be got.
  * @return Disk's free space.
  */

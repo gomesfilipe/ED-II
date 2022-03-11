@@ -73,3 +73,17 @@ static int compare(const void * a, const void * b) {
 void sort_array(FileArray* fileArray) {
     qsort(fileArray->files, fileArray->length, sizeof(File*), compare);
 }
+
+int get_size_array(FileArray* fileArray) {
+    return fileArray->size;
+}
+
+int get_length_array(FileArray* fileArray) {
+    return fileArray->length;
+}
+
+File* get_file_at_index(FileArray* fileArray, int index) {
+    if(index >= fileArray->length) return NULL;
+    
+    return fileArray->files[index];
+}
