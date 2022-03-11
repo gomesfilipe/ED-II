@@ -4,7 +4,6 @@ struct file {
     int size;
 };
 
-
 File* create_file(int size) {
     File* file = (File*) malloc(sizeof(File));
     file->size = size;

@@ -29,7 +29,7 @@ void print_file_array(FileArray* fileArray) {
     printf("\n");
 }
 
-void insert_file(FileArray* fileArray, File* file) {
+void insert_file_in_array(FileArray* fileArray, File* file) {
     if(fileArray->length == fileArray->size) return;
 
     fileArray->files[fileArray->length] = file;
@@ -53,7 +53,7 @@ FileArray* reader(char* fileName) {
         int sizeFile;
         fscanf(f, "%d\n", &sizeFile);
         File* file = create_file(sizeFile);
-        insert_file(fileArray, file);
+        insert_file_in_array(fileArray, file);
     }
 
     fclose(f);

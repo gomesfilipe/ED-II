@@ -13,7 +13,7 @@ void free_file_array(FileArray* fileArray);
 
 void print_file_array(FileArray* fileArray);
 
-void insert_file(FileArray* fileArray, File* file);
+void insert_file_in_array(FileArray* fileArray, File* file);
 
 FileArray* reader(char* fileName);
 
