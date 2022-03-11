@@ -1,5 +1,7 @@
 #include "../include/file_array.h"
 
+#define SUCCESS 1
+#define FAIL 0
 struct fileArray {
     int size;
     int length;
@@ -29,11 +31,12 @@ void print_file_array(FileArray* fileArray) {
     printf("\n");
 }
 
-void insert_file_in_array(FileArray* fileArray, File* file) {
-    if(fileArray->length == fileArray->size) return;
+int insert_file_in_array(FileArray* fileArray, File* file) {
+    if(fileArray->length == fileArray->size) return FAIL;
 
     fileArray->files[fileArray->length] = file;
     fileArray->length++;
+    return SUCCESS;
 }
 
 FileArray* reader(char* fileName) {

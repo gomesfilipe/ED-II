@@ -1,7 +1,8 @@
 #include "../include/disk.h"
 
 #define DISK_CAPACITY 1000000
-
+#define SUCCESS 1
+#define FAIL 0
 struct disk {
     int capacity;
     int freeSpace;
@@ -30,8 +31,9 @@ int get_freeSpace(Disk* disk) {
     return disk->freeSpace;
 }
 
-void insert_file_in_disk(Disk* disk, File* file) {
-    if(get_size(file) > disk->freeSpace) return;
+int insert_file_in_disk(Disk* disk, File* file) {
+    if(get_size(file) > disk->freeSpace) return FAIL;
 
     disk->freeSpace -= get_size(file);
+    return SUCCESS;
 }
