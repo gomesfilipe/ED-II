@@ -4,7 +4,9 @@
 #include "../include/file_array.h"
 #include "../include/disk.h"
 #include "../include/disk_max_heap.h"
+#include "../include/disk_bs_tree.h"
 #include "../include/worst_fit.h"
+#include "../include/best_fit.h"
 
 int main(int argc, char** argv) {
     if(argc != 2) {
@@ -14,11 +16,8 @@ int main(int argc, char** argv) {
 
     FileArray* fileArray = reader(argv[1]);
 
-    printf("discos in order [%d]\n", worst_fit_in_order(fileArray));
-    printf("discos descending [%d]\n", worst_fit_descending(fileArray));
-    
-
-    // Heap* heap = create_heap(fileArray);    
+    // printf("discos in order [%d]\n", worst_fit(fileArray));
+    // printf("discos descending [%d]\n", worst_fit_descending(fileArray));  
     
     // Disk* disk0 = create_disk();
     // Disk* disk1 = create_disk();
@@ -38,6 +37,29 @@ int main(int argc, char** argv) {
     // insert_file_in_disk(disk3, file3);
     // insert_file_in_disk(disk4, file4);
 
+    // Tree* tree = create_tree(disk0);
+    // insert_disk_in_tree(tree, disk1);
+    // insert_disk_in_tree(tree, disk2);
+    // insert_disk_in_tree(tree, disk3);
+    // insert_disk_in_tree(tree, disk4);
+
+    // print_tree(tree);
+
+    // File* newFile = create_file(900000);
+    // Disk* removed = NULL;
+    // // // insert_file_in_disk(removed, newFile);
+    // printf("\n\nantes remover\n");
+    // tree = remove_min_disk_in_tree(tree, newFile, &removed);
+    // printf("depois remover\n");
+    // printf("\n\n--------------------\n\n");
+    
+    // print_tree(tree);
+
+    // printf("\n---------\nremoved: ");
+    // if(removed != NULL) 
+    //     print_disk(removed);
+    // else
+    //     printf("ninguem");
     // insert_disk_in_heap(heap, disk0);
     // insert_disk_in_heap(heap, disk1);
     // insert_disk_in_heap(heap, disk2);
@@ -54,6 +76,9 @@ int main(int argc, char** argv) {
     // free_disk(d);
     // free_disk(e);
     // free_heap(heap);
+    // free_disk(removed);
+    free_file(newFile);
+    free_tree(tree);
     free_file_array(fileArray);
 
     return 0;

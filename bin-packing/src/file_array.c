@@ -2,6 +2,7 @@
 
 #define SUCCESS 1
 #define FAIL 0
+
 struct fileArray {
     int size;
     int length;
@@ -64,7 +65,7 @@ FileArray* reader(char* fileName) {
 }
 
 static int compare(const void * a, const void * b) {
-    File* fileA = *(File**) a;
+    File* fileA = *(File**) a;   
     File* fileB = *(File**) b;
 
     return get_size(fileB) - get_size(fileA);

@@ -35,5 +35,5 @@ clean: # Remove pasta com os arquivos objeto e o executável.
 	-rm -f $(TARGET)
 
 run: # Executa o programa com valgrind com uma entrada específica.
-	./$(TARGET) in/10000000.txt
+	valgrind ./$(TARGET) in/20.txt
 	

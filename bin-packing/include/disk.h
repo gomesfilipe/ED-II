@@ -40,6 +40,8 @@ int get_capacity(Disk* disk);
  */
 int get_freeSpace(Disk* disk);
 
+int has_space(Disk* disk, File* file);
+
 /**
  * @brief Inserts a file in a disk, decreasing his free space. 
  * @param disk Disk that will have a file inserted.

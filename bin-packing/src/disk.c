@@ -32,8 +32,12 @@ int get_freeSpace(Disk* disk) {
     return disk->freeSpace;
 }
 
+int has_space(Disk* disk, File* file) {
+    return disk->freeSpace >= get_size(file);
+}
+
 int insert_file_in_disk(Disk* disk, File* file) {
-    if(get_size(file) > disk->freeSpace) return FAIL;
+    if(!has_space(disk, file)) return FAIL;
 
     disk->freeSpace -= get_size(file);
     return SUCCESS;

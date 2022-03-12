@@ -3,7 +3,7 @@
 #define SUCCESS 1
 #define FAIL 0
 
-int worst_fit_in_order(FileArray* fileArray) {
+int worst_fit(FileArray* fileArray) {
     Heap* heap = create_heap(fileArray);
     
     Disk* firstDisk = create_disk();
@@ -32,5 +32,5 @@ int worst_fit_in_order(FileArray* fileArray) {
 
 int worst_fit_descending(FileArray* fileArray) {
     sort_array(fileArray);
-    return worst_fit_in_order(fileArray);
+    return worst_fit(fileArray);
 }

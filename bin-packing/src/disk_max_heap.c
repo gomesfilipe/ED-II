@@ -80,11 +80,11 @@ static void max_heapify(Heap* heap, int i) {
     int left = left_child_index(i);
     int right = right_child_index(i);
 
-    if(left < heap->length && get_freeSpace(heap->disks[left]) >  get_freeSpace(heap->disks[largest])) {
+    if(left < heap->length && get_freeSpace(heap->disks[left]) > get_freeSpace(heap->disks[largest])) {
         largest = left;
     }
 
-    if(right < heap->length && get_freeSpace(heap->disks[right]) >  get_freeSpace(heap->disks[largest])) {
+    if(right < heap->length && get_freeSpace(heap->disks[right]) > get_freeSpace(heap->disks[largest])) {
         largest = right;
     }
 

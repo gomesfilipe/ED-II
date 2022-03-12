@@ -13,7 +13,7 @@
  * @param fileArray File array.
  * @return Quantity of disks.
  */
-int worst_fit_in_order(FileArray* fileArray);
+int worst_fit(FileArray* fileArray);
 
 /**
  * @brief Executes the worst fit with the file array sorted.
