@@ -17,7 +17,10 @@ int main(int argc, char** argv) {
     FileArray* fileArray = reader(argv[1]);
 
     // printf("discos in order [%d]\n", worst_fit(fileArray));
-    // printf("discos descending [%d]\n", worst_fit_descending(fileArray));  
+    // printf("discos descending [%d]\n", worst_fit_descending(fileArray));
+
+    printf("discos in order [%d]\n", best_fit(fileArray));
+    printf("discos descending [%d]\n", best_fit_descending(fileArray));  
     
     // Disk* disk0 = create_disk();
     // Disk* disk1 = create_disk();
@@ -77,8 +80,8 @@ int main(int argc, char** argv) {
     // free_disk(e);
     // free_heap(heap);
     // free_disk(removed);
-    free_file(newFile);
-    free_tree(tree);
+    // free_file(newFile);
+    // free_tree(tree);
     free_file_array(fileArray);
 
     return 0;

@@ -66,7 +66,7 @@ Tree* remove_min_disk_in_tree(Tree* tree, File* file, Disk** removed) {
     Tree* aux;
     if(is_empty_tree(tree)) return NULL;
     // printf("disco: ");
-    print_disk(tree->disk);
+    // print_disk(tree->disk);
     if(has_space(tree->disk, file)) { // cabe no pai, ver se cabe no left
         if(!is_empty_tree(tree->left) && has_space(tree->left->disk, file)) { // se left existe e tem espaço, chamar recursivamente
             // printf("entrou left\n");
@@ -76,7 +76,7 @@ Tree* remove_min_disk_in_tree(Tree* tree, File* file, Disk** removed) {
             *removed = tree->disk;
             // printf("chegou no que vai remover\n");
             //!
-            if(is_empty_tree(tree->left) && is_empty_tree(tree->right)){ // Folha.
+            if(is_leaf_node(tree)){ // Folha.
                 free(tree);
                 return NULL; // Atualizando ponteiro do nó pai. 
             
@@ -97,12 +97,15 @@ Tree* remove_min_disk_in_tree(Tree* tree, File* file, Disk** removed) {
                 }
                 swap(&tree->disk, &aux->disk);
 
+                // printf("chegou aq\n");
                 tree->left = remove_min_disk_in_tree(tree->left, file, removed);
+                // aux = remove_min_disk_in_tree(aux, file, removed);
             }
             //!
         }
     
     } else { // não cabe no pai, ver se cabe no right
+        // printf("chegou aq\n");
         if(!is_empty_tree(tree->right)) { // se right existe, chamar recursivamente, independente de ter espaço ou não
             // printf("entrou right\n");
             tree->right = remove_min_disk_in_tree(tree->right, file, removed);

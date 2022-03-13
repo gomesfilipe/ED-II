@@ -4,6 +4,8 @@
 #define FAIL 0
 
 int worst_fit(FileArray* fileArray) {
+    if(get_length_array(fileArray) == 0) return 0;
+    
     Heap* heap = create_heap(fileArray);
     
     Disk* firstDisk = create_disk();

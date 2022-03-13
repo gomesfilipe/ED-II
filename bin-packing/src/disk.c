@@ -21,7 +21,8 @@ void free_disk(Disk* disk) {
 }
 
 void print_disk(Disk* disk) {
-    printf("%d / %d\n", disk->freeSpace, disk->capacity);
+    // printf("%d / %d\n", disk->freeSpace, disk->capacity);
+    printf("%d\n", disk->freeSpace);
 }
 
 int get_capacity(Disk* disk) {
