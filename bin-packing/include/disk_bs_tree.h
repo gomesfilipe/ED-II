@@ -21,6 +21,8 @@ void print_tree(Tree* tree);
 
 Tree* insert_disk_in_tree(Tree* tree, Disk* disk);
 
-Tree* remove_min_disk_in_tree(Tree* tree, File* file, Disk** removed);
+void search_min_disk_in_tree(Tree* tree, File* file, Disk** min);
+
+Tree* remove_min_disk_in_tree(Tree* tree, int key, Disk** removed);
 
 #endif

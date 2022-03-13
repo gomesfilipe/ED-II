@@ -20,12 +20,19 @@ int best_fit(FileArray* fileArray) {
         // printf("laço [%d]\n\n", i);
         // printf("file size %d\n", get_size(file));
         
-        Disk* removed = NULL;
-        tree = remove_min_disk_in_tree(tree, file, &removed);
+        Disk* min = NULL;
+        search_min_disk_in_tree(tree, file, &min);
+        
+        // if(min != NULL){
+        //     // printf("min disk: ");
+        //     print_disk(min);
+        // } else {
+        //     printf("nao ha min disk\n");
+        // }
 
         // print_tree(tree);
 
-        if(removed == NULL) {
+        if(min == NULL) {
             // printf("\nnao removeu\n");
             Disk* newDisk = create_disk();
             insert_file_in_disk(newDisk, file);
@@ -35,21 +42,27 @@ int best_fit(FileArray* fileArray) {
             quantityDisks++;
         
         } else {
-            // printf("\nremoveu: ");
-            // print_disk(removed);
+            Disk* removed = NULL;
+            tree = remove_min_disk_in_tree(tree, get_freeSpace(min), &removed);
+
+            // printf("arvore apos remover:\n\n");
+            // print_tree(tree);
+        //     // printf("[%d]", removed == NULL);
+        //     // printf("\nremoveu: ");
+        //     // print_disk(removed);
             insert_file_in_disk(removed, file);
             
             
-            // printf("depois de inserir arquivo no disco: ");
+        //     printf("depois de inserir arquivo no disco: ");
             // print_disk(removed);
             if(get_freeSpace(removed) != 0) {
                 tree = insert_disk_in_tree(tree, removed);
             } else {
                 free_disk(removed);
             }
-            // printf("\narvore dps de reinserir:\n");
-            // print_tree(tree);
-            // printf("\n");
+        //     printf("\narvore dps de reinserir:\n");
+        //     print_tree(tree);
+        //     printf("\n");
         }
 
         // printf("----------\n");
@@ -62,6 +75,6 @@ int best_fit(FileArray* fileArray) {
 }
 
 int best_fit_descending(FileArray* fileArray) {
-    sort_array(fileArray);
+    // sort_array(fileArray);
     return best_fit(fileArray);
 }

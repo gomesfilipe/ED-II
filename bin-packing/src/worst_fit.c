@@ -33,6 +33,6 @@ int worst_fit(FileArray* fileArray) {
 }
 
 int worst_fit_descending(FileArray* fileArray) {
-    sort_array(fileArray);
+    // sort_array(fileArray);
     return worst_fit(fileArray);
 }
