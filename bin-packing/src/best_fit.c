@@ -75,6 +75,6 @@ int best_fit(FileArray* fileArray) {
 }
 
 int best_fit_descending(FileArray* fileArray) {
-    // sort_array(fileArray);
+    sort_array(fileArray);
     return best_fit(fileArray);
 }

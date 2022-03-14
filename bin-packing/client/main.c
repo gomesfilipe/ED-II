@@ -21,8 +21,6 @@ int main(int argc, char** argv) {
 
     printf("worst fit            [%d] \n", worst_fit(fileArray));
     printf("best fit             [%d]\n", best_fit(fileArray));
-
-    sort_array(fileArray);
     printf("worst fit descending [%d]\n", worst_fit_descending(fileArray));
     printf("best fit descending  [%d]\n\n", best_fit_descending(fileArray));  
     
@@ -31,6 +29,5 @@ int main(int argc, char** argv) {
     printf("execution time [%.3f]\n", time);
 
     free_file_array(fileArray);
-
     return 0;
 }
