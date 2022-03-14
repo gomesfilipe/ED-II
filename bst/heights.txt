@@ -1,0 +1,30 @@
+Alturas com inserção em folhas:
+47
+48
+46
+51
+50
+53
+46
+50
+51
+50
+
+Média = 49,2
+Limite inferior balanceado: 20
+Limite inferior aleatório: 60
+Limite superior: 1.000.000
+
+Alturas com inserção na raiz:
+49
+47
+47
+49
+48
+50
+54
+48
+48
+50
+
+Média = 49
