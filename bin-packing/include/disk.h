@@ -40,7 +40,14 @@ int get_capacity(Disk* disk);
  */
 int get_freeSpace(Disk* disk);
 
-int has_space(Disk* disk, File* file);
+/**
+ * @brief Checks if there is enough space in a disk for a file.
+ * @param disk Disk that will be checked.
+ * @param file File.
+ * @return 1, if there is enough space.
+ * @return 0, if there isn't enough space.
+ */
+int there_is_space(Disk* disk, File* file);
 
 /**
  * @brief Inserts a file in a disk, decreasing his free space. 

@@ -32,7 +32,7 @@ int worst_fit(FileArray* fileArray) {
     return quantityDisks;
 }
 
-int worst_fit_descending(FileArray* fileArray) {
+int worst_fit_decreasing(FileArray* fileArray) {
     sort_array(fileArray);
     return worst_fit(fileArray);
 }

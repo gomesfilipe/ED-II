@@ -74,7 +74,7 @@ int best_fit(FileArray* fileArray) {
     return quantityDisks;
 }
 
-int best_fit_descending(FileArray* fileArray) {
+int best_fit_decreasing(FileArray* fileArray) {
     sort_array(fileArray);
     return best_fit(fileArray);
 }

@@ -65,7 +65,7 @@ static void swap(Disk** a, Disk** b) {
 void search_min_disk_in_tree(Tree* tree, File* file, Disk** min) {
     if(is_empty_tree(tree)) return;
 
-    if(has_space(tree->disk, file)) { // cabe no pai, ver se cabe no left
+    if(there_is_space(tree->disk, file)) { // cabe no pai, ver se cabe no left
         *min = tree->disk;
         search_min_disk_in_tree(tree->left, file, min);
     

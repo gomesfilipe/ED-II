@@ -20,6 +20,6 @@ int best_fit(FileArray* fileArray);
  * @param fileArray File array.
  * @return Quantity of disks.
  */
-int best_fit_descending(FileArray* fileArray);
+int best_fit_decreasing(FileArray* fileArray);
 
 #endif

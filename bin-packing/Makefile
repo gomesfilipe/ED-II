@@ -1,4 +1,4 @@
-TARGET := tp3
+TARGET := trab3
 LIBS := -lm
 CFLAGS := -g -O3 -Wno-unused-result
 #CFLAGS := -g -O3 
@@ -35,5 +35,5 @@ clean: # Remove pasta com os arquivos objeto e o executável.
 	-rm -f $(TARGET)
 
 run: # Executa o programa com valgrind com uma entrada específica.
-	./$(TARGET) in/1000000.txt
+	./$(TARGET) in/5.txt
 	
