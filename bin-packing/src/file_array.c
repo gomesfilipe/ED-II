@@ -88,3 +88,16 @@ File* get_file_at_index(FileArray* fileArray, int index) {
     
     return fileArray->files[index];
 }
+
+unsigned long int size_sum_array(FileArray* fileArray) {
+    unsigned long int sum = 0;
+    for(int i = 0; i < fileArray->length; i++) {
+        sum += get_size(fileArray->files[i]);
+    }
+
+    return sum;
+}
+
+double size_average_array(FileArray* fileArray) {
+    return (double) size_sum_array(fileArray) / fileArray->length;
+}

@@ -9,66 +9,33 @@ int best_fit(FileArray* fileArray) {
     Disk* firstDisk = create_disk();
     insert_file_in_disk(firstDisk, get_file_at_index(fileArray, 0));
     
+    // Initializing tree with first disk.
     Tree* tree = create_tree(firstDisk);
-    // print_tree(tree);
-    // printf("\n\n");
     int quantityDisks = 1;
 
+    // For each file in array.
     for(int i = 1; i < get_size_array(fileArray); i++) {
-        // printf("----------\n");
         File* file = get_file_at_index(fileArray, i);
-        // printf("laço [%d]\n\n", i);
-        // printf("file size %d\n", get_size(file));
-        
         Disk* min = NULL;
-        search_min_disk_in_tree(tree, file, &min);
-        
-        // if(min != NULL){
-        //     // printf("min disk: ");
-        //     print_disk(min);
-        // } else {
-        //     printf("nao ha min disk\n");
-        // }
+        search_min_disk_in_tree(tree, file, &min); // Look for ideal disk and put it in min.
 
-        // print_tree(tree);
-
-        if(min == NULL) {
-            // printf("\nnao removeu\n");
+        if(min == NULL) { // If there isn't ideal disk, create a new one and insert it in tree. 
             Disk* newDisk = create_disk();
             insert_file_in_disk(newDisk, file);
             tree = insert_disk_in_tree(tree, newDisk);
-            // printf("arvore dps de inserir:\n");
-            // print_tree(tree);
             quantityDisks++;
         
-        } else {
+        } else { // If there is, remove disk from tree.
             Disk* removed = NULL;
             tree = remove_min_disk_in_tree(tree, get_freeSpace(min), &removed);
-
-            // printf("arvore apos remover:\n\n");
-            // print_tree(tree);
-        //     // printf("[%d]", removed == NULL);
-        //     // printf("\nremoveu: ");
-        //     // print_disk(removed);
             insert_file_in_disk(removed, file);
             
-            
-        //     printf("depois de inserir arquivo no disco: ");
-            // print_disk(removed);
-            if(get_freeSpace(removed) != 0) {
-                tree = insert_disk_in_tree(tree, removed);
-            } else {
+            if(get_freeSpace(removed) != 0) { // After inserting a file in disk, if still there is space in the disk, insert it again in tree 
+            } else { // If there isn't enoght space anymore, it doesn't need to insert the disk in the tree.
                 free_disk(removed);
             }
-        //     printf("\narvore dps de reinserir:\n");
-        //     print_tree(tree);
-        //     printf("\n");
         }
-
-        // printf("----------\n");
     }
-
-    // print_tree(tree);
 
     free_tree(tree);
     return quantityDisks;

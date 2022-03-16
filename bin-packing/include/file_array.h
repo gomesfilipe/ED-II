@@ -70,4 +70,18 @@ int get_length_array(FileArray* fileArray);
  */
 File* get_file_at_index(FileArray* fileArray, int index);
 
+/**
+ * @brief Sum all sizes of a file array.
+ * @param fileArray File array.
+ * @return Total sum of sizes of a file array.
+ */
+unsigned long int size_sum_array(FileArray* fileArray);
+
+/**
+ * @brief Calculates the size average of a file array.
+ * @param fileArray File array.
+ * @return Average of sizes from the file array.
+ */
+double size_average_array(FileArray* fileArray);
+
 #endif

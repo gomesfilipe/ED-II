@@ -6,21 +6,27 @@
 int worst_fit(FileArray* fileArray) {
     if(get_length_array(fileArray) == 0) return 0;
     
+    // Creating an empthy heap.
     Heap* heap = create_heap(fileArray);
     
+    // Initializing heap with first disk 
     Disk* firstDisk = create_disk();
     insert_file_in_disk(firstDisk, get_file_at_index(fileArray, 0));
     insert_disk_in_heap(heap, firstDisk);
 
+    // For each file in array.
     for(int i = 1; i < get_size_array(fileArray); i++) {
         Disk* disk = get_first_disk_in_heap(heap);
         File* file = get_file_at_index(fileArray, i);
 
+        // If it's possible to insert file in disk, remove disk from heap and insert again in heap 
+        //to correct the position.
         if(insert_file_in_disk(disk, file) == SUCCESS) {
             Disk* removed = remove_max_disk_in_heap(heap);
             insert_disk_in_heap(heap, removed);
         
-        } else {
+        } else { //If isn't possible to insert file in disk, create a new disk and insert file in it 
+        //and insert the disk in heap.
             Disk* newDisk = create_disk();
             insert_file_in_disk(newDisk, file);
             insert_disk_in_heap(heap, newDisk);

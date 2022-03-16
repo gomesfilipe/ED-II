@@ -17,22 +17,11 @@ int main(int argc, char** argv) {
 
     FileArray* fileArray = reader(argv[1]);
 
-    clock_t start = clock();
-
-    printf("worst fit            [%d] \n", worst_fit(fileArray));
-    printf("best fit             [%d]\n", best_fit(fileArray));
-    printf("worst fit decreasing [%d]\n", worst_fit_decreasing(fileArray));
-    printf("best fit decreasing  [%d]\n\n", best_fit_decreasing(fileArray)); 
-
-    // printf("%d\n", worst_fit(fileArray));
-    // printf("%d\n", best_fit(fileArray));
-    // printf("%d\n", worst_fit_decreasing(fileArray));
-    // printf("%d\n", best_fit_decreasing(fileArray)); 
+    printf("%d\n", worst_fit(fileArray));
+    printf("%d\n", best_fit(fileArray));
+    printf("%d\n", worst_fit_decreasing(fileArray));
+    printf("%d\n", best_fit_decreasing(fileArray)); 
     
-    clock_t end = clock();
-    double time = ((double) (end - start)) / CLOCKS_PER_SEC;
-    printf("execution time [%.3f]\n", time);
-
     free_file_array(fileArray);
     return 0;
 }
