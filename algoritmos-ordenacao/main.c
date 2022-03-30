@@ -1,23 +1,20 @@
 #include "sort.h"
+#include <string.h>
 
-#define QTDALGORITMOS 5
+#define QTDALGORITMOS 4
+// #define QTDALGORITMOS 7
+
+int power(int base, int exponent);
 
 int main(){
-    int length = 1000000;
-    // int* array = create_random_array(length);
-    // int* array = create_sorted_array(length);
-    int* array = create_inverted_array(length);
-
-    printf("is sorted before: [%d]\n", is_sorted(array, length));
-    heap_sort(array, length);
-    printf("is sorted after: [%d]\n", is_sorted(array, length));
-    free_array(array);
     // fptr sort_functions[QTDALGORITMOS] = {
     //     bubble_sort,
     //     selection_sort, 
     //     insertion_sort, 
     //     shell_sort, 
-    //     quick_sort
+    //     quick_sort,
+    //     heap_sort, 
+    //     merge_sort
     // };
 
     // char* sort_names[QTDALGORITMOS] = {
@@ -25,36 +22,68 @@ int main(){
     //     "Selection Sort", 
     //     "Insertion Sort", 
     //     "Shell Sort", 
-    //     "Quick Sort"
+    //     "Quick Sort", 
+    //     "Heap Sort", 
+    //     "Merge Sort"
     // };
 
-    // FILE *f = fopen("analise2.txt", "w");
+    fptr sort_functions[QTDALGORITMOS] = {
+        shell_sort, 
+        quick_sort,
+        heap_sort, 
+        merge_sort
+    };
+
+    char* sort_names[QTDALGORITMOS] = {
+        "Shell Sort", 
+        "Quick Sort", 
+        "Heap Sort", 
+        "Merge Sort"
+    };
+
+    FILE *f = fopen("analise-2.txt", "w");
     
-    // if(f == NULL){
-    //     printf("Erro na abertura do arquivo.\n");
-    //     exit(1);
-    // }
+    if(f == NULL){
+        printf("Erro na abertura do arquivo.\n");
+        exit(1);
+    }
 
-    // int x = 0;
+    int begin = 5000;
+    int tests = 12;
+    for(int j = 0; j < tests; j++){
+        int length = power(2, j) * begin;
 
-    // for(int length = 5000; length <= 1280000; length *= 2){
-    //     fprintf(f, "Tamanho do vetor: %d\n", length);
+        printf("Tamanho do vetor: %d\n", length);
+        fprintf(f, "Tamanho do vetor: %d\n", length);
 
-    //     for(int i = 0; i < QTDALGORITMOS; i++){
-    //         int* array = create_array(length);
+        for(int i = 0; i < QTDALGORITMOS; i++){
+            int* array = create_random_array(length);
+            // int* array = create_sorted_array(length);
+            // int* array = create_inverted_array(length);
 
-    //         double time = timer(sort_functions[i], array, length);
+            double time = timer(sort_functions[i], array, length);
 
-    //         fprintf(f, "%s: %.3lf s\n", sort_names[i], time);
+            printf("%s: %.3lf s\n", sort_names[i], time);
+            fprintf(f, "%s: %.3lf s\n", sort_names[i], time);
 
-    //         free_array(array);
+            free_array(array);
+        }
 
-    //         printf("[%d]\n", x++); // Para me situar em qual ponto da execução está.
-    //     }
+        printf("\n");
+        fprintf(f, "\n");
+    }
 
-    //     fprintf(f, "\n");
-    // }
-
-    // fclose(f);
+    fclose(f);
     return 0;
+}
+
+int power(int base, int exponent){
+    if(exponent == 0) return 1;
+
+    int result = 1;
+    for(int i = 0; i < exponent; i++){
+        result *= base;
+    }
+
+    return result;
 }

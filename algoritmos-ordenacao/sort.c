@@ -183,8 +183,58 @@ void heap_sort(int* array, int length){
     }
 }
 
-void merge_sort(int* array, int length){
+static void merge(int* array, int left, int mid, int right){
+    int size_left_half = mid - left + 1;
+    int size_right_half = right - mid;
 
+    int* left_half = (int*) malloc(sizeof(int) * size_left_half);
+    int* right_half = (int*) malloc(sizeof(int) * size_right_half);
+
+    for(int i = 0; i < size_left_half; i++) 
+        left_half[i] = array[left + i];
+
+    for(int j = 0; j < size_right_half; j++) 
+        right_half[j] = array[mid + 1 + j];
+    
+    int i = 0, j = 0, k = left;
+    
+    while(i < size_left_half && j < size_right_half){
+        if(left_half[i] < right_half[j]){
+            array[k] = left_half[i];
+            i++;
+        } else{
+            array[k] = right_half[j];
+            j++;
+        }
+        k++;
+    }
+    
+    if(i < size_left_half){
+        for(i; i < size_left_half; i++, k++) 
+            array[k] = left_half[i];   
+        
+    } else{
+        for(j; j < size_right_half; j++, k++) 
+            array[k] = right_half[j]; 
+    }
+
+    free(left_half);
+    free(right_half);
+}
+
+static void aux_merge_sort(int* array, int left, int right){
+    if(left >= right) return;
+    
+    int mid = (left + right) / 2;
+    
+    aux_merge_sort(array, left, mid);
+    aux_merge_sort(array, mid + 1, right);
+    
+    merge(array, left, mid, right);
+}
+
+void merge_sort(int* array, int length){
+    aux_merge_sort(array, 0, length - 1);
 }
 
 int is_sorted(int* array, int length){

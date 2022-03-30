@@ -1,0 +1,72 @@
+Tamanho do vetor: 5000
+Shell Sort: 0.000 s
+Quick Sort: 0.000 s
+Heap Sort: 0.000 s
+Merge Sort: 0.016 s
+
+Tamanho do vetor: 10000
+Shell Sort: 0.000 s
+Quick Sort: 0.000 s
+Heap Sort: 0.000 s
+Merge Sort: 0.000 s
+
+Tamanho do vetor: 20000
+Shell Sort: 0.000 s
+Quick Sort: 0.000 s
+Heap Sort: 0.016 s
+Merge Sort: 0.000 s
+
+Tamanho do vetor: 40000
+Shell Sort: 0.016 s
+Quick Sort: 0.000 s
+Heap Sort: 0.016 s
+Merge Sort: 0.000 s
+
+Tamanho do vetor: 80000
+Shell Sort: 0.031 s
+Quick Sort: 0.016 s
+Heap Sort: 0.016 s
+Merge Sort: 0.031 s
+
+Tamanho do vetor: 160000
+Shell Sort: 0.047 s
+Quick Sort: 0.031 s
+Heap Sort: 0.047 s
+Merge Sort: 0.047 s
+
+Tamanho do vetor: 320000
+Shell Sort: 0.125 s
+Quick Sort: 0.078 s
+Heap Sort: 0.109 s
+Merge Sort: 0.078 s
+
+Tamanho do vetor: 640000
+Shell Sort: 0.281 s
+Quick Sort: 0.141 s
+Heap Sort: 0.188 s
+Merge Sort: 0.141 s
+
+Tamanho do vetor: 1280000
+Shell Sort: 0.531 s
+Quick Sort: 0.250 s
+Heap Sort: 0.547 s
+Merge Sort: 0.281 s
+
+Tamanho do vetor: 2560000
+Shell Sort: 1.250 s
+Quick Sort: 0.547 s
+Heap Sort: 1.062 s
+Merge Sort: 0.594 s
+
+Tamanho do vetor: 5120000
+Shell Sort: 2.688 s
+Quick Sort: 1.172 s
+Heap Sort: 2.484 s
+Merge Sort: 1.234 s
+
+Tamanho do vetor: 10240000
+Shell Sort: 6.516 s
+Quick Sort: 2.422 s
+Heap Sort: 5.734 s
+Merge Sort: 2.547 s
+
