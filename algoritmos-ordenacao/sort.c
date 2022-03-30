@@ -70,8 +70,12 @@ void insertion_sort(int* array, int length){
 }
 
 void shell_sort(int* array, int length){
-    int inserted, j;
-    for(int gap = length / 2; gap > 0; gap /= 2){
+    int inserted, j, gap;
+
+    for(gap = 1; gap < length; gap = 3 * gap + 1);
+    gap = (gap - 1) / 3;
+
+    for(gap; gap > 0; gap = (gap - 1) / 3){
 
         for(int i = gap; i < length; i++){
             inserted = array[i];

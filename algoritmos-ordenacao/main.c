@@ -3,49 +3,56 @@
 #define QTDALGORITMOS 5
 
 int main(){
-    fptr sort_functions[QTDALGORITMOS] = {
-        bubble_sort,
-        selection_sort, 
-        insertion_sort, 
-        shell_sort, 
-        quick_sort
-    };
+    int length = 100000;
+    int* array = create_array(length);
 
-    char* sort_names[QTDALGORITMOS] = {
-        "Bubble Sort", 
-        "Selection Sort", 
-        "Insertion Sort", 
-        "Shell Sort", 
-        "Quick Sort"
-    };
+    printf("is sorted before: [%d]\n", is_sorted(array, length));
+    shell_sort(array, length);
+    printf("is sorted after: [%d]\n", is_sorted(array, length));
+    free_array(array);
+    // fptr sort_functions[QTDALGORITMOS] = {
+    //     bubble_sort,
+    //     selection_sort, 
+    //     insertion_sort, 
+    //     shell_sort, 
+    //     quick_sort
+    // };
 
-    FILE *f = fopen("analise2.txt", "w");
+    // char* sort_names[QTDALGORITMOS] = {
+    //     "Bubble Sort", 
+    //     "Selection Sort", 
+    //     "Insertion Sort", 
+    //     "Shell Sort", 
+    //     "Quick Sort"
+    // };
+
+    // FILE *f = fopen("analise2.txt", "w");
     
-    if(f == NULL){
-        printf("Erro na abertura do arquivo.\n");
-        exit(1);
-    }
+    // if(f == NULL){
+    //     printf("Erro na abertura do arquivo.\n");
+    //     exit(1);
+    // }
 
-    int x = 0;
+    // int x = 0;
 
-    for(int length = 5000; length <= 1280000; length *= 2){
-        fprintf(f, "Tamanho do vetor: %d\n", length);
+    // for(int length = 5000; length <= 1280000; length *= 2){
+    //     fprintf(f, "Tamanho do vetor: %d\n", length);
 
-        for(int i = 0; i < QTDALGORITMOS; i++){
-            int* array = create_array(length);
+    //     for(int i = 0; i < QTDALGORITMOS; i++){
+    //         int* array = create_array(length);
 
-            double time = timer(sort_functions[i], array, length);
+    //         double time = timer(sort_functions[i], array, length);
 
-            fprintf(f, "%s: %.3lf s\n", sort_names[i], time);
+    //         fprintf(f, "%s: %.3lf s\n", sort_names[i], time);
 
-            free_array(array);
+    //         free_array(array);
 
-            printf("[%d]\n", x++); // Para me situar em qual ponto da execução está.
-        }
+    //         printf("[%d]\n", x++); // Para me situar em qual ponto da execução está.
+    //     }
 
-        fprintf(f, "\n");
-    }
+    //     fprintf(f, "\n");
+    // }
 
-    fclose(f);
+    // fclose(f);
     return 0;
 }
