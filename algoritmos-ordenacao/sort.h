@@ -7,7 +7,11 @@
 
 typedef void (*fptr) (int*, int);
 
-int* create_array(int length);
+int* create_random_array(int length);
+
+int* create_sorted_array(int length);
+
+int* create_inverted_array(int length);
 
 void free_array(int* array);
 

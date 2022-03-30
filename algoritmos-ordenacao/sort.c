@@ -1,12 +1,32 @@
 #include "sort.h"
 
-int* create_array(int length){
+int* create_random_array(int length){
     int* array = (int*) malloc(sizeof(int) * length);
 
     srand(time(NULL));
 
     for(int i = 0; i < length; i++){
         array[i] = rand();
+    }
+
+    return array;
+}
+
+int* create_sorted_array(int length){
+    int* array = (int*) malloc(sizeof(int) * length);
+
+    for(int i = 0; i < length; i++){
+        array[i] = i;
+    }
+
+    return array;
+}
+
+int* create_inverted_array(int length){
+    int* array = (int*) malloc(sizeof(int) * length);
+
+    for(int i = 0; i < length; i++){
+        array[i] = length - i - 1;
     }
 
     return array;
@@ -89,10 +109,24 @@ void shell_sort(int* array, int length){
     }
 }
 
-void partition(int* array, int begin, int end){
+static int is_between(int a, int b, int c){ // is a between b and c?
+    return (b <= a && a <= c) || (c <= a && a <= b);
+}
+
+static int pivo_position(int* array, int begin, int end){
+    int mid = (begin + end) / 2;
+    if(is_between(array[begin], array[mid], array[end])) return begin;
+    if(is_between(array[mid], array[begin], array[end])) return mid;
+    if(is_between(array[end], array[begin], array[mid])) return end;
+}
+
+static void partition(int* array, int begin, int end){
     if(begin >= end) return;
     
-    int pivo = begin;
+    int pivo = pivo_position(array, begin, end);
+    swap(&array[begin], &array[pivo]);
+
+    pivo = begin;
     int j = begin + 1;
 
     for(int i = begin; i <= end; i++){
