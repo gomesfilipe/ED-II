@@ -148,6 +148,45 @@ void quick_sort(int* array, int length){
     partition(array, 0, length - 1);
 }
 
+static void max_heapify(int* array, int length, int i){
+    if(i >= length) return;
+    
+    int largest = i;
+    int left = 2 * i + 1;
+    int right = 2 * i + 2;
+
+    if(left < length && array[left] > array[largest]) largest = left;
+    if(right < length && array[right] > array[largest]) largest = right;
+
+    if(largest != i){
+        swap(&array[i], &array[largest]);
+        max_heapify(array, length, largest);
+    }
+}
+
+static int dad(int i){
+    return (i - 1) / 2;
+}
+
+static void create_heap(int* array, int length){
+    for(int i = dad(length - 1); i >= 0; i--){
+        max_heapify(array, length, i);
+    }
+}
+
+void heap_sort(int* array, int length){
+    create_heap(array, length);
+
+    for(int i = length - 1; i >= 0; i--){
+        swap(&array[0], &array[i]);
+        max_heapify(array, i, 0);
+    }
+}
+
+void merge_sort(int* array, int length){
+
+}
+
 int is_sorted(int* array, int length){
     for(int i = 0; i < length - 1; i++){
         if(array[i] > array[i + 1]){

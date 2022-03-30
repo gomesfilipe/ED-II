@@ -5,11 +5,11 @@
 int main(){
     int length = 1000000;
     // int* array = create_random_array(length);
-    int* array = create_sorted_array(length);
-    // int* array = create_inverted_array(length);
+    // int* array = create_sorted_array(length);
+    int* array = create_inverted_array(length);
 
     printf("is sorted before: [%d]\n", is_sorted(array, length));
-    quick_sort(array, length);
+    heap_sort(array, length);
     printf("is sorted after: [%d]\n", is_sorted(array, length));
     free_array(array);
     // fptr sort_functions[QTDALGORITMOS] = {
